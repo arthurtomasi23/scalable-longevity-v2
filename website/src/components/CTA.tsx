@@ -1,6 +1,8 @@
 "use client";
+import { ArrowRight } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { track } from "@vercel/analytics/server";
 
 type Step = {
   id: number;
@@ -142,8 +144,8 @@ export default function CTA() {
   const textIsVisible = (idx: number) => numberIsActive(idx);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 p-30 text-black">
-      <p className="text-3xl">Your Journey</p>
+    <div className="flex flex-col justify-center items-center gap-10 p-30">
+      <p className="text-3xl text-font-secondary">Your Journey</p>
       <h2 className="text-[60px] font-semibold">How to get started?</h2>
       <div className="w-full flex flex-row">
         {/* LEFT: Numbers + connectors */}
@@ -198,7 +200,7 @@ export default function CTA() {
                   {step.title}
                 </h4>
                 <p
-                  className={`transition-all duration-300 delay-75 ${
+                  className={`transition-all duration-300 delay-75 text-font-secondary ${
                     show
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-2"
@@ -211,45 +213,19 @@ export default function CTA() {
           })}
         </div>
       </div>
-      {/* download app cta section */}
-      <div className="flex flex-col items-center justify-center py-12 w-full">
-        <p className="mb-6 text-lg font-semibold text-gray-800">
-          Download the App
-        </p>
-        <div className="flex flex-row gap-4">
-          {/* App Store */}
-          <a
-            href="https://apps.apple.com/app/your-app-id"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="h-12 w-auto"
-          >
-            <Image
-              src="/badges/apple_us.svg"
-              alt="Download on the App Store"
-              width={180} // official ratio
-              height={60}
-              className="h-full w-auto"
-            />
-          </a>
-
-          {/* Google Play */}
-          <a
-            href="https://play.google.com/store/apps/details?id=your.app.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="h-12 w-auto"
-          >
-            <Image
-              src="/badges/google-play_us.png"
-              alt="Get it on Google Play"
-              width={646} // official ratio
-              height={250}
-              className="h-full w-auto"
-            />
-          </a>
-        </div>
-      </div>
+      <Link
+        href="/survey"
+        className="group inline-flex items-center justify-center rounded-full border bg-secondary px-5 py-4 text-md font-semibold text-white transition hover:translate-y-[-1px] hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60"
+        onClick={() =>
+          track("survey_start_click", {
+            from: "home_hero",
+            variant: "primary",
+          })
+        }
+      >
+        Start your assessment
+        <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
+      </Link>
     </div>
   );
 }

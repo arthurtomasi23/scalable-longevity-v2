@@ -3,10 +3,10 @@ import React from "react";
 export default function Hero() {
   return (
     <div
-      className="w-full h-screen bg-cover bg-center flex items-center justify-center"
+      className="w-full h-screen bg-cover bg-center flex justify-center text-background"
       style={{ backgroundImage: "url('/background.jpg')" }}
     >
-      <div className="max-w-7xl px-4 flex flex-col -mt-70 items-center justify-center">
+      <div className="max-w-7xl h-full px-4 flex flex-col items-center pt-20">
         <h1 className="text-[140px] font-semibold text-center">
           Unlock More Life
         </h1>

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import "./globals.css";
 import HeaderNav from "../components/ui/HeaderNav";
+import Footer from "../components/Footer";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Variable.woff2",
@@ -22,6 +25,9 @@ export default function RootLayout({
       <body className={`${satoshi.variable} antialiased`}>
         <HeaderNav />
         {children}
+        <Footer />
+        <Analytics /> {/* page views + events */}
+        <SpeedInsights /> {/* performance metrics */}
       </body>
     </html>
   );
