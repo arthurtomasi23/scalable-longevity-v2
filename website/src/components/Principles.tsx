@@ -9,26 +9,27 @@ export default function Principles() {
           <h3 className="text-[30px] font-semibold">Insight Hub</h3>
           <p>
             We start with a small problem.
-            <span className="text-blue-400">KNOWLEDGE.</span> We help you
-            understand what you can start doing today to directly increase not
-            only your Lifespan but your Healthspan!
+            <span className="text-blue-400 font-semibold"> KNOWLEDGE.</span> We
+            help you understand what you can start doing today to directly
+            increase not only your Lifespan but your Healthspan!
           </p>
         </div>
         <div className="p-10 rounded-3xl bg-white flex flex-col">
           <h3 className="text-[30px] font-semibold">LifePath Analyser</h3>
           <p>
-            We <span className="text-blue-400">ANALYSE</span> your current
-            behaviour and Patterns and find out whats missing you and what
-            exactly can help you feel better and live longer
+            We <span className="text-blue-400 font-semibold">ANALYSE</span> your
+            current behaviour and Patterns and find out whats missing you and
+            what exactly can help you feel better and live longer
           </p>
         </div>
         <div className="p-10 rounded-3xl bg-white flex flex-col">
           <h3 className="text-[30px] font-semibold">Habit Engine</h3>
           <p>
             And lastly we will tackle the biggest challenge of all. We will help
-            you <span className="text-blue-400">STICK TO IT.</span> With our
-            Habit Engine we will create healthy Habits for you that you can
-            actually hold!
+            you{" "}
+            <span className="text-blue-400 font-semibold">STICK TO IT.</span>{" "}
+            With our Habit Engine we will create healthy Habits for you that you
+            can actually hold!
           </p>
         </div>
       </div>
