@@ -158,57 +158,72 @@ export default function SurveyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col justify-center items-center">
       {/* Header */}
-      <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-6">
-        <h1 className="text-3xl font-semibold text-font-primary">
-          Mini Survey
-        </h1>
-        <p className="mt-1 text-font-secondary">
-          A quick preview to estimate your biological age drivers. You can save
-          your results at the end.
-        </p>
+      {!preview && (
+        <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-6">
+          <h1 className="text-3xl font-semibold text-font-primary">
+            Mini Survey
+          </h1>
+          <p className="mt-1 text-font-secondary">
+            A quick preview to estimate your biological age drivers. You can
+            save your results at the end.
+          </p>
 
-        {/* Progress */}
-        <div className="mt-6">
-          <div className="h-2 w-full rounded-full bg-black/10">
-            <div
-              className="h-2 rounded-full bg-primary transition-all"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="mt-2 text-xs text-font-secondary">
-            Step {step + 1} of {STEPS.length} — {STEPS[step].title}
+          {/* Progress */}
+
+          <div className="mt-6">
+            <div className="h-2 w-full rounded-full bg-black/10">
+              <div
+                className="h-2 rounded-full bg-primary transition-all"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="mt-2 text-xs text-font-secondary">
+              Step {step + 1} of {STEPS.length} — {STEPS[step].title}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Content */}
-      <div className="mx-auto w-full max-w-5xl px-4 pb-36 grid gap-5">
-        {STEPS[step].key === "profile" && <ProfileStep form={form} set={set} />}
-        {STEPS[step].key === "body" && <BodyStep form={form} set={set} />}
-        {STEPS[step].key === "activity" && (
-          <ActivityStep form={form} set={set} />
-        )}
-        {STEPS[step].key === "cardio" && <CardioStep form={form} set={set} />}
-        {STEPS[step].key === "lifestyle" && (
-          <LifestyleStep form={form} set={set} />
-        )}
-        {STEPS[step].key === "metabolic" && (
-          <MetabolicStep form={form} set={set} />
-        )}
-      </div>
+      {!preview && (
+        <div className="mx-auto w-full max-w-5xl px-4 pb-36 grid gap-5">
+          {STEPS[step].key === "profile" && (
+            <ProfileStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "body" && <BodyStep form={form} set={set} />}
+          {STEPS[step].key === "activity" && (
+            <ActivityStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "cardio" && <CardioStep form={form} set={set} />}
+          {STEPS[step].key === "lifestyle" && (
+            <LifestyleStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "metabolic" && (
+            <MetabolicStep form={form} set={set} />
+          )}
+        </div>
+      )}
 
-      {preview && <ResultsPreview preview={preview} />}
+      {preview && (
+        <div className="flex w-full h-full justify-center items-center">
+          {preview && (
+            <ResultsPreview preview={preview} chronoAge={Number(form.age)} />
+          )}
+        </div>
+      )}
 
-      <StickyNav
-        canBack={step > 0}
-        canNext={canContinue()}
-        atEnd={step === STEPS.length - 1}
-        onBack={back}
-        onNext={next}
-        onSubmit={submit}
-      />
+      {!preview && (
+        <StickyNav
+          canBack={step > 0}
+          canNext={canContinue()}
+          atEnd={step === STEPS.length - 1}
+          onBack={back}
+          onNext={next}
+          onSubmit={submit}
+        />
+      )}
     </div>
   );
 }

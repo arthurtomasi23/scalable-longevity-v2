@@ -67,14 +67,22 @@ export default function CardioStep({
 
         <div>
           <Label>Systolic BP</Label>
-          <NumberInput
-            value={form.systolic_bp}
-            onChange={(v) => set("systolic_bp", v)}
-            placeholder="e.g., 120"
-            min={LIMITS.systolic_bp.min}
-            max={LIMITS.systolic_bp.max}
-            unit="mmHg"
-          />
+          <Help>
+            Systolic blood pressure is the top number in a blood pressure
+            reading. It measures the pressure in your arteries when your heart
+            beats. You can measure it using a home blood pressure monitor or at
+            a clinic.
+          </Help>
+          <div className="mt-2">
+            <NumberInput
+              value={form.systolic_bp}
+              onChange={(v) => set("systolic_bp", v)}
+              placeholder="e.g., 120"
+              min={LIMITS.systolic_bp.min}
+              max={LIMITS.systolic_bp.max}
+              unit="mmHg"
+            />
+          </div>
         </div>
       </div>
     </Card>
