@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import Logo from "../Logo";
 
 const baseItem =
-  "px-4 py-2 rounded-full transition-colors duration-200 hover:bg-secondary/10 hover:text-font-primary focus:outline-none focus:ring-2 focus:ring-secondary/40";
-const ctaItem = `${baseItem} border border-secondary/50`;
+  "px-4 py-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2";
+const ctaItem = `${baseItem} border border-white/50`;
 
 export default function HeaderNav() {
   const pathname = usePathname();
@@ -25,10 +25,19 @@ export default function HeaderNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  const headerBg =
-    pathname === "/" && isAtTop
-      ? "bg-transparent"
-      : "bg-background border-b border-card-border";
+  const isTransparent = pathname === "/" && isAtTop;
+  const headerBg = isTransparent
+    ? "bg-transparent text-white border-white"
+    : "bg-background border-b border-card-border";
+
+  // Conditional classes for nav links
+  const navLinkBase = isTransparent
+    ? `${baseItem} text-white hover:bg-white hover:text-black`
+    : `${baseItem} text-font-primary hover:bg-secondary/10 hover:text-font-primary`;
+
+  const navLinkCta = isTransparent
+    ? `${ctaItem} text-white hover:bg-white hover:text-black`
+    : `${ctaItem} text-font-primary hover:bg-secondary/10 hover:text-font-primary`;
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 ${headerBg}`}>
@@ -36,16 +45,16 @@ export default function HeaderNav() {
         <Logo />
 
         <nav
-          className="flex items-center gap-2 text-font-primary font-semibold"
+          className="flex items-center gap-2 font-semibold"
           aria-label="Main"
         >
-          <Link href="/contact" className={baseItem}>
+          <Link href="/contact" className={navLinkBase}>
             Contact
           </Link>
-          <Link href="/get-started" className={baseItem}>
+          <Link href="/get-started" className={navLinkBase}>
             Sign In
           </Link>
-          <Link href="/get-started" className={ctaItem}>
+          <Link href="/get-started" className={navLinkCta}>
             Get Started
           </Link>
         </nav>
