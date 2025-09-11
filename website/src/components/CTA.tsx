@@ -144,9 +144,11 @@ export default function CTA() {
   const textIsVisible = (idx: number) => numberIsActive(idx);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 p-30">
+    <div className="flex flex-col justify-center items-center gap-10 p-6 sm:p-30">
       <p className="text-3xl text-font-secondary">Your Journey</p>
-      <h2 className="text-[60px] font-semibold">How to get started?</h2>
+      <h2 className="text-[clamp(1.75rem,6vw,3.75rem)] font-semibold">
+        How to get started?
+      </h2>
       <div className="w-full flex flex-row">
         {/* LEFT: Numbers + connectors */}
         <div className="flex flex-col justify-center items-center">
@@ -157,7 +159,7 @@ export default function CTA() {
             return (
               <React.Fragment key={step.id}>
                 <p
-                  className={`text-[100px] font-black h-40 flex items-center justify-center leading-none ${numberColor}`}
+                  className={`text-[clamp(2.5rem,15vw,6.25rem)] font-black h-40 flex items-center justify-center leading-none ${numberColor}`}
                 >
                   {String(step.id).padStart(2, "0")}
                 </p>
@@ -191,7 +193,7 @@ export default function CTA() {
                 className="w-full h-40 flex flex-col justify-center items-start"
               >
                 <h4
-                  className={`font-semibold transition-all duration-300 ${
+                  className={`font-semibold text-[clamp(1rem,4vw,1.25rem)] transition-all duration-300 ${
                     show
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-2"
@@ -200,7 +202,7 @@ export default function CTA() {
                   {step.title}
                 </h4>
                 <p
-                  className={`transition-all duration-300 delay-75 text-font-secondary ${
+                  className={`text-[clamp(0.9rem,3.5vw,1rem)] transition-all duration-300 delay-75 text-font-secondary ${
                     show
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-2"

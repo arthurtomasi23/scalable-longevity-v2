@@ -75,26 +75,25 @@ export default function Features() {
 
   const currentSlide = slides[current];
 
-  return (
-    <div className="flex flex-col p-20">
-      {/* Carousel */}
-      <div className="flex flex-row items-center justify-center gap-10">
-        <button
-          className="bg-black/20 rounded-full p-4 flex items-center justify-center"
-          onClick={prevImage}
-          aria-label="Previous image"
-        >
-          <ChevronLeft size={32} color="white" />
-        </button>
+  const activeHotspot =
+    openHotspot && currentSlide.hotspots.find((h) => h.id === openHotspot);
 
-        {/* Card wrapper: fixed size, image fills completely */}
-        <div className="relative w-full max-w-[1098px] h-[680px] rounded-3xl overflow-hidden bg-card border border-card-border shadow-sm">
+  return (
+    <div className="flex flex-col px-4 py-10 md:px-8 md:py-16">
+      {/* Carousel */}
+      <div className="relative w-full mx-auto max-w-[1400px]">
+        {/* Image wrapper: make it as big as possible */}
+        <div
+          className="relative w-full rounded-3xl overflow-hidden bg-card border border-card-border shadow-sm
+                     aspect-[9/16] sm:aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/10]"
+          onClick={() => setOpenHotspot(null)}
+        >
           <Image
             src={currentSlide.src}
             alt={`Feature image ${current + 1}`}
             fill
-            className="object-cover" // fill the card; no empty margins
-            sizes="(max-width: 1200px) 100vw, 1098px"
+            className="object-cover"
+            sizes="100vw"
             priority
           />
 
@@ -119,23 +118,21 @@ export default function Features() {
                   track("hotspot_hover", { slide: current, hotspot: hs.id })
                 }
               >
-                {/* White pulsing marker */}
-                <div className="relative h-5 w-5">
-                  {/* outer white pulse */}
+                {/* White pulsing marker (bigger tap target) */}
+                <div className="relative h-7 w-7">
                   <span className="absolute inset-0 rounded-full ring-2 ring-white/80 animate-ping" />
-                  {/* inner white dot with subtle halo */}
                   <span className="absolute inset-0 rounded-full bg-white shadow-[0_0_0_4px_rgba(255,255,255,0.35)]" />
                 </div>
 
-                {/* Tooltip */}
+                {/* Desktop tooltip (hover) + tap-open support */}
                 <div
                   className={[
                     "absolute z-10 mt-3 w-64 rounded-xl border border-card-border bg-card p-3 text-sm shadow-lg",
-                    "transition-all duration-200 opacity-0 translate-y-1 pointer-events-none",
-                    "group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto",
+                    "transition-all duration-200",
                     isOpen
                       ? "opacity-100 translate-y-0 pointer-events-auto"
-                      : "",
+                      : "opacity-0 translate-y-1 pointer-events-none",
+                    "md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-hover:pointer-events-auto",
                   ].join(" ")}
                   style={{ left: "50%", transform: "translateX(-50%)" }}
                 >
@@ -147,23 +144,50 @@ export default function Features() {
               </div>
             );
           })}
+
+          {/* Overlayed arrows so image uses max width */}
+          <button
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 rounded-full p-3 md:p-4
+                       flex items-center justify-center backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="text-white" size={24} />
+          </button>
+
+          <button
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 rounded-full p-3 md:p-4
+                       flex items-center justify-center backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            aria-label="Next image"
+          >
+            <ChevronRight className="text-white" size={24} />
+          </button>
         </div>
 
-        <button
-          className="bg-black/20 rounded-full p-4 flex items-center justify-center"
-          onClick={nextImage}
-          aria-label="Next image"
-        >
-          <ChevronRight size={32} color="white" />
-        </button>
+        {/* Mobile hotspot info panel (single, below the image) */}
+        {activeHotspot && (
+          <div className="sm:hidden mt-4 rounded-xl border border-card-border bg-card p-3 text-sm shadow-sm">
+            <div className="font-semibold text-font-primary">
+              {activeHotspot.title}
+            </div>
+            <div className="mt-1 text-font-secondary">{activeHotspot.text}</div>
+          </div>
+        )}
       </div>
 
       {/* Download CTA */}
-      <div className="flex flex-col items-center justify-center py-12 w-full">
-        <p className="mb-6 text-lg font-semibold text-gray-800">
+      <div className="flex flex-col items-center justify-center py-10 w-full">
+        <p className="mb-6 text-lg font-semibold text-font-primary">
           Download the App
         </p>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
           {/* App Store */}
           <a
             href="https://apps.apple.com/app/your-app-id"

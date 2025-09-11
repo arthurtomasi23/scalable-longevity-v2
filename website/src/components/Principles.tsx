@@ -2,11 +2,16 @@ import React from "react";
 
 export default function Principles() {
   return (
-    <div className="flex flex-col items-center gap-10 text-black w-full px-10">
-      <h2 className="text-[60px] font-semibold">Our 3 Principles</h2>
-      <div className="flex flex-row gap-5 items-center justify-center">
-        <div className="p-10 rounded-3xl bg-white flex flex-col border-black/5">
-          <h3 className="text-[30px] font-semibold">Insight Hub</h3>
+    <section className="flex flex-col items-center gap-10 text-black w-full px-6 md:px-10">
+      <h2 className="text-[clamp(2rem,6vw,3.75rem)] font-semibold text-center">
+        Our 3 Principles
+      </h2>
+
+      <div className="flex flex-col md:flex-row gap-6 w-full max-w-6xl">
+        <div className="flex-1 p-6 md:p-10 rounded-3xl bg-white flex flex-col border border-black/5 shadow-sm">
+          <h3 className="text-[clamp(1.25rem,3vw,1.875rem)] font-semibold mb-3">
+            Insight Hub
+          </h3>
           <p>
             We start with a small problem.
             <span className="text-primary font-semibold"> KNOWLEDGE.</span> We
@@ -14,16 +19,22 @@ export default function Principles() {
             increase not only your Lifespan but your Healthspan!
           </p>
         </div>
-        <div className="p-10 rounded-3xl bg-white flex flex-col border-black/5border-black/5">
-          <h3 className="text-[30px] font-semibold">LifePath Analyser</h3>
+
+        <div className="flex-1 p-6 md:p-10 rounded-3xl bg-white flex flex-col border border-black/5 shadow-sm">
+          <h3 className="text-[clamp(1.25rem,3vw,1.875rem)] font-semibold mb-3">
+            LifePath Analyser
+          </h3>
           <p>
             We <span className="text-primary font-semibold">ANALYSE</span> your
-            current behaviour and Patterns and find out whats missing you and
+            current behaviour and Patterns and find out what’s missing you and
             what exactly can help you feel better and live longer
           </p>
         </div>
-        <div className="p-10 rounded-3xl bg-white flex flex-col border-black/5">
-          <h3 className="text-[30px] font-semibold">Habit Engine</h3>
+
+        <div className="flex-1 p-6 md:p-10 rounded-3xl bg-white flex flex-col border border-black/5 shadow-sm">
+          <h3 className="text-[clamp(1.25rem,3vw,1.875rem)] font-semibold mb-3">
+            Habit Engine
+          </h3>
           <p>
             And lastly we will tackle the biggest challenge of all. We will help
             you <span className="text-primary font-semibold">STICK TO IT.</span>{" "}
@@ -32,6 +43,6 @@ export default function Principles() {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
