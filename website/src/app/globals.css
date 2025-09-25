@@ -6,12 +6,12 @@
   --foreground: #1A1A1A;
 
   /* Brand palette */
-  --primary: #F2994A;      /* Sunrise Gold (CTA) */
-  --secondary: #2D9CDB;    /* Sky Blue */
+  --primary: #2E4A3F;      /* Sunrise Gold (CTA) */
+  --secondary: #87AFC7;    /* Sky Blue */
   --card: #FFFFFF;         /* Card background */
   --card-border: #F2F2F2;  /* Card border */
-  --font-primary: #1A1A1A; /* Main text */
-  --font-secondary: #6E6E6E; /* Secondary text */
+  --font-primary: #3B3B3C; /* Main text */
+  --font-secondary: #C1C1C1; /* Secondary text */
 }
 
 @theme inline {
