@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics/server";
@@ -217,7 +217,7 @@ export default function CTA() {
       </div>
       <Link
         href="/survey"
-        className="group inline-flex items-center justify-center rounded-full border bg-secondary px-5 py-4 text-md font-semibold text-white transition hover:translate-y-[-1px] hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60"
+        className="group inline-flex items-center justify-center rounded-full border bg-primary px-5 py-4 text-md font-semibold text-white transition hover:translate-y-[-1px] hover:bg-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60"
         onClick={() =>
           track("survey_start_click", {
             from: "home_hero",
@@ -225,8 +225,8 @@ export default function CTA() {
           })
         }
       >
-        Start your assessment
-        <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
+        Jetzt Test Starten
+        <ArrowUpRight className="ml-2 transition group-hover:translate-x-0.5" />
       </Link>
     </div>
   );
