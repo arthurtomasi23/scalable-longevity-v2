@@ -64,15 +64,15 @@ export default function SurveyCTA() {
               <Check className="inline mr-2" />
               <p>jede menge Optionen</p>
             </div>
-            <div className="flex flex-row text-font-primary">
+            <div className="flex flex-row text-font-secondary">
               <Check className="inline mr-2" />
               <p>jede menge Optionen</p>
             </div>
-            <div className="flex flex-row text-font-primary">
+            <div className="flex flex-row text-font-secondary">
               <Check className="inline mr-2" />
               <p>jede menge Optionen</p>
             </div>
-            <div className="flex flex-row text-font-primary">
+            <div className="flex flex-row text-font-secondary">
               <Check className="inline mr-2" />
               <p>jede menge Optionen</p>
             </div>
