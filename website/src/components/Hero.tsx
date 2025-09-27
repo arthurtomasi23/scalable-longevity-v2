@@ -16,14 +16,14 @@ export default function Hero() {
                    flex flex-col items-start text-left 
                    md:items-center md:text-center"
       >
-        <h1 className="text-white font-semibold leading-tight tracking-tight text-[clamp(2rem,8vw,5.5rem)]">
+        <h1 className="text-white font-semibold leading-tight tracking-tight text-7xl">
           Unlock More Life
         </h1>
-        <p className="mt-4 text-white/90 text-[clamp(1.1rem,4.5vw,1.875rem)] max-w-xl md:max-w-3xl">
+        <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
           Simple Changes for lasting Well-Being
         </p>
         <button className="bg-black/40 backdrop-blur-3xl hover:bg-black/30 transition-colors mt-8 p-2 rounded-full flex items-center gap-4">
-          <span className="text-white font-semibold pl-3 text-lg">
+          <span className="text-white font-semibold pl-3 text-md">
             Mit Scalable Starten
           </span>
           <div className="flex justify-center items-center w-[55px] h-[55px] rounded-full bg-primary flex-shrink-0 group cursor-pointer">

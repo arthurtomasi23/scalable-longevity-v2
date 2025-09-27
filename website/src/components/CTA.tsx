@@ -2,7 +2,7 @@
 import { ArrowUpRight } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { track } from "@vercel/analytics/server";
+import { track } from "@vercel/analytics";
 
 type Step = {
   id: number;
@@ -14,20 +14,20 @@ type Step = {
 const STEPS: Step[] = [
   {
     id: 1,
-    title: "Fill out a Form",
-    text: "You will fill out a short form assessing your current situation",
+    title: "Formular ausfüllen",
+    text: "Sie füllen ein kurzes Formular aus, um Ihre aktuelle Situation einzuschätzen.",
     tailwindHeightClass: "h-30",
   },
   {
     id: 2,
-    title: "Analyse your Results",
-    text: "Your collected Data will run through our Algorithm to give you the optimal plan to better your health starting today!",
+    title: "Analysieren Sie Ihre Ergebnisse",
+    text: "Ihre gesammelten Daten werden von unserem Algorithmus ausgewertet, um Ihnen den optimalen Plan für eine bessere Gesundheit ab heute zu geben!",
     tailwindHeightClass: "h-30",
   },
   {
     id: 3,
-    title: "Start building Habits",
-    text: "Now that you have the perfect roadmap what to do our system will help you stick to the new Habits that will transform your life!",
+    title: "Beginnen Sie mit neuen Gewohnheiten",
+    text: "Jetzt, da Sie die perfekte Roadmap haben, hilft Ihnen unser System dabei, die neuen Gewohnheiten beizubehalten, die Ihr Leben verändern werden!",
     tailwindHeightClass: "h-30",
   },
 ];
@@ -145,9 +145,9 @@ export default function CTA() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 p-6 sm:p-30">
-      <p className="text-3xl text-font-secondary">Your Journey</p>
+      <p className="text-3xl text-font-secondary">Ihre Reise</p>
       <h2 className="text-[clamp(1.75rem,6vw,3.75rem)] font-semibold">
-        How to get started?
+        Wie fangen Sie an?
       </h2>
       <div className="w-full flex flex-row">
         {/* LEFT: Numbers + connectors */}

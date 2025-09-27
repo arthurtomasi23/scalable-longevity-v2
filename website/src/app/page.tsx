@@ -1,8 +1,9 @@
 import Hero from "@/components/Hero";
 import Principles from "@/components/Principles";
-import Features from "@/components/Features";
+// import Features from "@/components/Features";
 import CTA from "@/components/CTA";
 import Survey from "@/components/Survey";
+import FiveParts from "@/components/FiveParts";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
       <Principles />
       <CTA />
       <Survey />
-      <Features />
+      <FiveParts />
+      {/* <Features /> */}
     </div>
   );
 }

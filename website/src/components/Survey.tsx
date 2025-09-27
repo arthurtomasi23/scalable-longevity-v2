@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { track } from "@vercel/analytics/server";
+import { track } from "@vercel/analytics";
 
 export default function SurveyCTA() {
   return (
