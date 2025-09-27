@@ -38,11 +38,11 @@ const items = [
 export default function FiveParts() {
   return (
     <section className="flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen">
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="text-[50px] font-medium text-center">
+      <div className="flex flex-col justify-center items-center text-center">
+        <h2 className="text-4xl md:text-5xl font-medium">
           Was könnt ihr verändern?
         </h2>
-        <p className="font-medium text-[20px] max-w-4xl text-center">
+        <p className="font-medium text-xl max-w-4xl">
           Wir arbeiten mit 5 Handlungsfeldern die dein Leben komplett umkrempeln
           können. Diese Handlungsfelder sind...
         </p>
@@ -87,8 +87,8 @@ export default function FiveParts() {
 
               {/* Bottom: text */}
               <div className="text-white">
-                <h3 className="text-[30px] leading-tight">{it.title}</h3>
-                <p className="text-[16px] opacity-90">{it.text}</p>
+                <h3 className="text-xl leading-tight">{it.title}</h3>
+                <p className="text-base opacity-90">{it.text}</p>
               </div>
             </div>
           </article>

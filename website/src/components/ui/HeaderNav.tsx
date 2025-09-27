@@ -17,10 +17,10 @@ export default function HeaderNav() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-2" aria-label="Main">
           <Link href="/contact" className={navLinkBase}>
-            Contact
+            Kontakt
           </Link>
           <Link href="/get-started" className={navLinkBase}>
-            Sign In
+            Anmelden
           </Link>
           <Link href="/get-started" className={navLinkCta}>
             Jetzt Starten

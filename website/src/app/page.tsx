@@ -4,6 +4,7 @@ import Principles from "@/components/Principles";
 import CTA from "@/components/CTA";
 import Survey from "@/components/Survey";
 import FiveParts from "@/components/FiveParts";
+import Newsletter from "@/components/Newsletter";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <CTA />
       <Survey />
       <FiveParts />
+      <Newsletter />
       {/* <Features /> */}
     </div>
   );

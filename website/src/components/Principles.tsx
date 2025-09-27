@@ -1,4 +1,4 @@
-import { LucideArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -23,9 +23,11 @@ const items = [
 export default function Principles() {
   return (
     <section className="flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen">
-      <div className="flex flex-col">
-        <h2 className="text-[50px] font-medium">Unsere drei Säulen</h2>
-        <p className="font-medium text-[20px] max-w-4xl pb-15">
+      <div className="flex flex-col mb-10">
+        {/* Section heading → 50px target */}
+        <h2 className="text-4xl md:text-5xl font-medium">Unsere drei Säulen</h2>
+        {/* Lead text → 20px target */}
+        <p className="font-medium text-xl max-w-4xl mt-4">
           Diese drei Säulen sind das Fundament, auf dem echte Änderungen
           entstehen – und wir helfen Ihnen dabei!
         </p>
@@ -49,16 +51,18 @@ export default function Principles() {
               />
             </div>
 
-            {/* Circle + title + text in a row */}
-            <div className="mt-4 flex justify-center items-center gap-4">
+            {/* Circle + title + text */}
+            <div className="mt-4 flex items-start gap-4">
               <div className="min-w-0">
+                {/* Title → 20px (lead size) */}
                 <h3 className="text-xl font-semibold leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-[15px] text-black/70 mt-1">{item.text}</p>
+                {/* Body text → 16px */}
+                <p className="text-base text-black/70 mt-1">{item.text}</p>
               </div>
               <div className="flex justify-center items-center w-[55px] h-[55px] rounded-full bg-card flex-shrink-0 group cursor-pointer">
-                <LucideArrowUpRight
+                <ArrowUpRight
                   color="#2E4A3F"
                   className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
