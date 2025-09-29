@@ -5,25 +5,25 @@ import { PillCTA } from "@/components/ui/PillCTA";
 export default function Hero() {
   return (
     <section
-      className="relative w-full min-h-[70vh] md:min-h-screen bg-cover bg-center flex items-center"
+      className="relative w-full min-h-[70vh] md:min-h-screen bg-cover bg-center flex justify-center items-center text-center"
       style={{ backgroundImage: "url('/background.jpg')" }}
     >
       {/* overlay */}
       <div className="absolute inset-0 bg-black/40 md:bg-black/30" />
 
       {/* content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 flex flex-col items-start text-left md:items-center md:text-center">
-        {/* Display: mobile 5xl, desktop 7xl (our allowed set) */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 flex flex-col items-center text-center">
+        {/* Heading */}
         <h1 className="text-white font-semibold leading-tight tracking-tight text-5xl md:text-7xl">
-          Unlock More Life
+          Mehr Lebenszeit
         </h1>
 
-        {/* Lead: 20px */}
+        {/* Lead */}
         <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
-          Simple Changes for lasting Well-Being
+          Einfach gesünder Leben Tag für Tag
         </p>
 
-        {/* CTA: replaces manual Link; colors + tracking baked in */}
+        {/* CTA */}
         <div className="mt-8">
           <PillCTA
             as="link"

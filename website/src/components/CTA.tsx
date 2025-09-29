@@ -1,8 +1,6 @@
 "use client";
-import { ArrowUpRight } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { track } from "@vercel/analytics";
+import { PillCTA } from "./ui/PillCTA";
 
 type Step = {
   id: number;
@@ -20,7 +18,7 @@ const STEPS: Step[] = [
   },
   {
     id: 2,
-    title: "Analysieren Sie Ihre Ergebnisse",
+    title: "Ihr Ergebnis wird analysiert",
     text: "Ihre gesammelten Daten werden von unserem Algorithmus ausgewertet, um Ihnen den optimalen Plan für eine bessere Gesundheit ab heute zu geben!",
     tailwindHeightClass: "h-30",
   },
@@ -144,7 +142,10 @@ export default function CTA() {
   const textIsVisible = (idx: number) => numberIsActive(idx);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 p-6 sm:p-30">
+    <div
+      id="how-it-works"
+      className="scroll-mt-[5vh] flex flex-col justify-center items-center gap-10 p-6 sm:p-30"
+    >
       <p className="text-3xl text-font-secondary">Ihre Reise</p>
       <h2 className="text-[clamp(1.75rem,6vw,3.75rem)] font-semibold">
         Wie fangen Sie an?
@@ -202,7 +203,7 @@ export default function CTA() {
                   {step.title}
                 </h4>
                 <p
-                  className={`text-[clamp(0.9rem,3.5vw,1rem)] transition-all duration-300 delay-75 text-font-secondary ${
+                  className={`text-[clamp(0.9rem,3.5vw,1rem)] transition-all duration-300 delay-75 text-font-primary ${
                     show
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-2"
@@ -215,19 +216,21 @@ export default function CTA() {
           })}
         </div>
       </div>
-      <Link
+      <PillCTA
+        as="link"
         href="/survey"
-        className="group inline-flex items-center justify-center rounded-full border bg-primary px-5 py-4 text-md font-semibold text-white transition hover:translate-y-[-1px] hover:bg-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60"
-        onClick={() =>
-          track("survey_start_click", {
-            from: "home_hero",
-            variant: "primary",
-          })
-        }
-      >
-        Jetzt Test Starten
-        <ArrowUpRight className="ml-2 transition group-hover:translate-x-0.5" />
-      </Link>
+        label="Jetzt Test Starten"
+        size="md"
+        bgClass="bg-primary hover:bg-primary/60"
+        textClass="text-white"
+        iconBgClass="bg-white"
+        iconColorClass="text-primary"
+        track={{
+          event: "survey_start_click",
+          from: "home_hero",
+          variant: "primary",
+        }}
+      />
     </div>
   );
 }

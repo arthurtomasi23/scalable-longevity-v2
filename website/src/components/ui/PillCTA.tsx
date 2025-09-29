@@ -6,26 +6,26 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { track as vercelTrack } from "@vercel/analytics";
 
-type Size = "sm" | "md" | "lg";
+export type Size = "sm" | "md" | "lg";
 type As = "button" | "link";
 
 type TrackOpts = {
-  event?: string; // default: "cta_click"
-  from?: string; // e.g., "home_hero"
-  variant?: string; // e.g., "primary"
+  event?: string;
+  from?: string;
+  variant?: string;
   extra?: Record<string, unknown>;
-  enabled?: boolean; // default: true
+  enabled?: boolean;
 };
 
-type PillCTAProps = {
+export interface PillCTAProps {
   as?: As;
-  href?: string; // required when as="link"
+  href?: string;
   label: string;
   Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   size?: Size;
   className?: string;
 
-  // Colors (Tailwind classes or combine with inline style)
+  // colors
   bgClass?: string;
   textClass?: string;
   iconBgClass?: string;
@@ -34,39 +34,25 @@ type PillCTAProps = {
 
   onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
   disabled?: boolean;
-
   track?: TrackOpts;
-};
 
-const sizeMap: Record<
-  Size,
-  { h: string; px: string; icon: string; font: string; iconSize: string }
-> = {
-  sm: {
-    h: "h-10",
-    px: "px-3",
-    icon: "w-8 h-8",
-    font: "text-sm",
-    iconSize: "w-4 h-4",
-  },
-  md: {
-    h: "h-14",
-    px: "px-4",
-    icon: "w-11 h-11",
-    font: "text-base",
-    iconSize: "w-5 h-5",
-  },
-  lg: {
-    h: "h-16",
-    px: "px-5",
-    icon: "w-14 h-14",
-    font: "text-lg",
-    iconSize: "w-5 h-5",
-  },
+  /** If true, renders without the trailing icon puck */
+  noIcon?: boolean;
+
+  /** Optional compact overrides */
+  paddingClass?: string;
+  gapClass?: string;
+  iconPuckSize?: number;
+}
+
+const sizeMap: Record<Size, { font: string; iconSize: string }> = {
+  sm: { font: "text-sm", iconSize: "w-5 h-5" },
+  md: { font: "text-base", iconSize: "w-6 h-6" },
+  lg: { font: "text-lg", iconSize: "w-6 h-6" },
 };
 
 export function PillCTA({
-  as = "link",
+  as = "button",
   href,
   label,
   Icon = ArrowUpRight,
@@ -80,18 +66,38 @@ export function PillCTA({
   onClick,
   disabled,
   track = { enabled: true, event: "cta_click" },
+  noIcon = false,
+  paddingClass,
+  gapClass,
+  iconPuckSize,
 }: PillCTAProps) {
   const s = sizeMap[size];
 
-  const base = `group inline-flex items-center justify-between rounded-full ${s.h} ${s.px} gap-4
-     ${bgClass} ${textClass} ${s.font}
-     transition-colors backdrop-blur-2xl
-     focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60
-     disabled:opacity-60 disabled:cursor-not-allowed`;
+  // ✅ Your requested defaults
+  const padding = paddingClass
+    ? paddingClass
+    : noIcon
+    ? "py-4 px-5"
+    : "py-2 pl-6 pr-2";
 
-  const iconWrap = `flex items-center justify-center rounded-full ${iconBgClass}
-     ${s.icon} flex-shrink-0 transition-transform duration-200
-     group-hover:translate-x-0.5 group-hover:-translate-y-0.5`;
+  const gap = noIcon ? "" : gapClass ?? "gap-5"; // ~20px
+
+  const base = `
+    group inline-flex items-center justify-between rounded-full
+    ${padding} ${gap} ${s.font}
+    ${bgClass} ${textClass}
+    font-semibold backdrop-blur-2xl
+    transition-colors
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60
+    disabled:opacity-60 disabled:cursor-not-allowed
+  `;
+
+  const puck = iconPuckSize ?? 55;
+  const iconWrap = `
+    flex items-center justify-center rounded-full ${iconBgClass}
+    w-[${puck}px] h-[${puck}px] flex-shrink-0 transition-transform duration-200
+    group-hover:translate-x-0.5 group-hover:-translate-y-0.5
+  `;
 
   const iconCls = `${s.iconSize} ${iconColorClass}`;
 
@@ -100,16 +106,26 @@ export function PillCTA({
   > = (e) => {
     onClick?.(e);
     if (e.defaultPrevented) return;
-
     if (track?.enabled !== false) {
       vercelTrack(track.event ?? "cta_click", {
-        ...(track.from ? { from: track.from } : {}),
+        ...(track.from !== undefined ? { from: track.from } : {}),
         ...(track.variant !== undefined ? { variant: track.variant } : {}),
         ...(track.extra ?? {}),
-        label, // helpful default
+        label,
       });
     }
   };
+
+  const content = (
+    <>
+      <span className="font-semibold">{label}</span>
+      {!noIcon && (
+        <span className={iconWrap}>
+          <Icon className={iconCls} />
+        </span>
+      )}
+    </>
+  );
 
   if (as === "link") {
     if (!href) throw new Error("PillCTA: 'href' is required when as='link'");
@@ -121,10 +137,7 @@ export function PillCTA({
         style={style}
         aria-label={label}
       >
-        <span className="font-semibold">{label}</span>
-        <span className={iconWrap}>
-          <Icon className={iconCls} />
-        </span>
+        {content}
       </Link>
     );
   }
@@ -138,10 +151,7 @@ export function PillCTA({
       disabled={disabled}
       aria-label={label}
     >
-      <span className="font-semibold">{label}</span>
-      <span className={iconWrap}>
-        <Icon className={iconCls} />
-      </span>
+      {content}
     </button>
   );
 }

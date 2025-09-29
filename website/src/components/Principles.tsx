@@ -22,14 +22,19 @@ const items = [
 
 export default function Principles() {
   return (
-    <section className="flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen">
-      <div className="flex flex-col mb-10">
+    <section
+      id="principles"
+      className="scroll-mt-[5vh] flex flex-col gap-10 text-black w-full px-6 md:px-20 justify-center min-h-screen"
+    >
+      <div className="flex flex-col justify-center items-center mb-10">
         {/* Section heading → 50px target */}
-        <h2 className="text-4xl md:text-5xl font-medium">Unsere drei Säulen</h2>
+        <h2 className="flex text-4xl text-center md:text-5xl font-medium">
+          Unsere drei Säulen
+        </h2>
         {/* Lead text → 20px target */}
-        <p className="font-medium text-xl max-w-4xl mt-4">
+        <p className="flex font-medium text-center text-xl max-w-3xl mt-4">
           Diese drei Säulen sind das Fundament, auf dem echte Änderungen
-          entstehen – und wir helfen Ihnen dabei!
+          entstehen und wir helfen Ihnen dabei diese aufzubauen!
         </p>
       </div>
 

@@ -4,8 +4,8 @@ import * as React from "react";
 export type Size = "sm" | "md" | "lg";
 
 const sizeMap = {
-  sm: { h: "h-10", px: "px-3", font: "text-sm" },
-  md: { h: "h-14", px: "px-4", font: "text-base" },
+  sm: { h: "h-10", px: "px-5", font: "text-sm" },
+  md: { h: "h-14", px: "px-5", font: "text-base" },
   lg: { h: "h-16", px: "px-5", font: "text-lg" },
 } as const satisfies Record<Size, { h: string; px: string; font: string }>;
 

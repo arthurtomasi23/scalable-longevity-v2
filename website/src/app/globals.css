@@ -13,6 +13,7 @@
   --font-primary: #3B3B3C; /* Main text */
   --font-secondary: #C1C1C1; /* Secondary text */
 }
+html { scroll-behavior: smooth; }
 
 @theme inline {
   /* Background + foreground */

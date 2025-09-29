@@ -6,7 +6,7 @@ const items = [
   {
     key: "wissen",
     title: "Wissen",
-    text: "Wissen Beschreibung",
+    text: "Verstehen, was wirklich hilft.",
     img: "/knowledge.jpg",
   },
   {
@@ -37,10 +37,13 @@ const items = [
 
 export default function FiveParts() {
   return (
-    <section className="flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen">
+    <section
+      id="fiveparts"
+      className="scroll-mt-[15vh] flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-[60vh]"
+    >
       <div className="flex flex-col justify-center items-center text-center">
         <h2 className="text-4xl md:text-5xl font-medium">
-          Was könnt ihr verändern?
+          Was können wir verändern?
         </h2>
         <p className="font-medium text-xl max-w-4xl">
           Wir arbeiten mit 5 Handlungsfeldern die dein Leben komplett umkrempeln
@@ -74,9 +77,9 @@ export default function FiveParts() {
             />
 
             {/* Content: icon at top-right, text bottom-left */}
-            <div className="absolute inset-0 p-4 flex flex-col justify-between">
+            <div className="absolute inset-0 p-6 flex flex-col justify-between">
               {/* Top: icon */}
-              <div className="flex justify-end">
+              <div className="flex justify-end -m-3">
                 <div className="flex justify-center items-center w-[60px] h-[60px] rounded-full bg-white/95 backdrop-blur-sm flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                   <ArrowUpRight
                     className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -86,7 +89,7 @@ export default function FiveParts() {
               </div>
 
               {/* Bottom: text */}
-              <div className="text-white">
+              <div className="text-white h-17">
                 <h3 className="text-xl leading-tight">{it.title}</h3>
                 <p className="text-base opacity-90">{it.text}</p>
               </div>

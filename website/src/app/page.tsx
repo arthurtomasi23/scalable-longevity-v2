@@ -12,8 +12,8 @@ export default function Home() {
       <Hero />
       <Principles />
       <CTA />
-      <Survey />
       <FiveParts />
+      <Survey />
       <Newsletter />
       {/* <Features /> */}
     </div>
