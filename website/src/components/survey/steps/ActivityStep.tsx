@@ -1,8 +1,8 @@
 // components/survey/steps/ActivityStep.tsx
 "use client";
-import Card from "@/components/ui/Card";
-import Segment from "@/components/ui/Segment";
-import { Label, Help } from "@/components/ui/Label";
+import Card from "@/components/survey/Card";
+import Segment from "@/components/survey/Segment";
+import { Label, Help } from "@/components/survey/Label";
 import type { FormState, Freq } from "@/lib/surveyTypes";
 
 export default function ActivityStep({
@@ -14,36 +14,41 @@ export default function ActivityStep({
 }) {
   return (
     <Card>
-      <Label>Activity</Label>
-      <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <Label>Aktivität</Label>
+
+      <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div>
-          <Label>Daily movement &gt; 30 min</Label>
-          <Help>How many days per week do you walk/move &gt;30 minutes?</Help>
+          <Label>Tägliche Bewegung &gt; 30&nbsp;Min.</Label>
+          <Help>
+            Wie oft pro Woche gehst du spazieren/bewegst dich mind.
+            30&nbsp;Minuten?
+          </Help>
           <div className="mt-2">
             <Segment<Freq>
               value={form.daily_movement}
               onChange={(v) => set("daily_movement", v)}
               options={[
                 { label: "0/Wo.", value: "0/Wo." },
-                { label: "1–2/Wo.", value: "1-2/Wo." },
-                { label: "3–4/Wo.", value: "3-4/Wo." },
-                { label: "5–7/Wo.", value: "5-7/Wo." },
+                { label: "1-2/Wo.", value: "1-2/Wo." }, // keep exact value keys
+                { label: "3-4/Wo.", value: "3-4/Wo." },
+                { label: "5-7/Wo.", value: "5-7/Wo." },
               ]}
             />
           </div>
         </div>
+
         <div>
-          <Label>Sport &gt; 30 min</Label>
-          <Help>Dedicated exercise sessions per week.</Help>
+          <Label>Sport &gt; 30&nbsp;Min.</Label>
+          <Help>Geplante Trainingseinheiten pro Woche.</Help>
           <div className="mt-2">
             <Segment<Freq>
               value={form.sport}
               onChange={(v) => set("sport", v)}
               options={[
                 { label: "0/Wo.", value: "0/Wo." },
-                { label: "1–2/Wo.", value: "1-2/Wo." },
-                { label: "3–4/Wo.", value: "3-4/Wo." },
-                { label: "5–7/Wo.", value: "5-7/Wo." },
+                { label: "1-2/Wo.", value: "1-2/Wo." },
+                { label: "3-4/Wo.", value: "3-4/Wo." },
+                { label: "5-7/Wo.", value: "5-7/Wo." },
               ]}
             />
           </div>

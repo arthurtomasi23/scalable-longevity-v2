@@ -17,7 +17,7 @@ export default function NumberInput({
   unit?: string;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <input
         type="number"
         min={min}
@@ -28,9 +28,9 @@ export default function NumberInput({
           onChange(v === "" ? "" : Number(v));
         }}
         placeholder={placeholder}
-        className="w-40 rounded-xl border border-card-border bg-white px-3 py-2 text-sm text-font-primary placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary"
+        className="w-40 rounded-full border border-card-border bg-black/5 px-5 py-3 text-base text-font-primary placeholder:text-font-secondary focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
-      {unit && <span className="text-sm text-font-secondary">{unit}</span>}
+      {unit && <span className="text-base text-font-secondary">{unit}</span>}
     </div>
   );
 }

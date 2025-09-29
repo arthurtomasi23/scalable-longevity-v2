@@ -7,7 +7,7 @@ export default function SurveyCTA() {
   return (
     <section
       id="survey"
-      className="scroll-mt-[15vh] flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen"
+      className="scroll-mt-[12vh] flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-screen"
     >
       {/* Heading + lead */}
       <div className="flex flex-col justify-center items-center text-center">

@@ -1,6 +1,6 @@
 // components/survey/ResultsPreview.tsx
 "use client";
-import Card from "@/components/ui/Card";
+import Card from "@/components/survey/Card";
 import type { ScoreResult } from "@/lib/surveyTypes";
 
 export default function ResultsPreview({

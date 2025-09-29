@@ -1,12 +1,12 @@
 // components/survey/steps/MetabolicStep.tsx
 "use client";
-import Card from "@/components/ui/Card";
-import Segment from "@/components/ui/Segment";
-import NumberInput from "@/components/ui/NumberInput";
-import { Label, Help } from "@/components/ui/Label";
+import Card from "@/components/survey/Card";
+import Segment from "@/components/survey/Segment";
+import NumberInput from "@/components/survey/NumberInput";
+import { Label, Help } from "@/components/survey/Label";
 import { LIMITS } from "@/lib/surveyConfig";
 import type { FormState, YesNo } from "@/lib/surveyTypes";
-import HoverCard from "@/components/ui/HoverCard";
+import HoverCard from "@/components/survey/HoverCard";
 import { Info } from "lucide-react";
 
 export default function MetabolicStep({
@@ -18,94 +18,107 @@ export default function MetabolicStep({
 }) {
   return (
     <Card>
-      <Label>Metabolic & Lipids</Label>
-      <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2">
+      <Label>Stoffwechsel &amp; Blutfette</Label>
+
+      <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Diabetes */}
         <div>
-          <Label>Diabetes diagnosis</Label>
+          <Label>Diabetes-Diagnose</Label>
           <div className="mt-2">
             <Segment<YesNo>
               value={form.diabetes_dx}
               onChange={(v) => set("diabetes_dx", v)}
               options={[
-                { label: "No", value: "no" },
-                { label: "Yes", value: "yes" },
+                { label: "Nein", value: "no" },
+                { label: "Ja", value: "yes" },
               ]}
             />
           </div>
         </div>
 
+        {/* HbA1c (nur wenn keine bekannte Diagnose) */}
         {form.diabetes_dx === "no" && (
           <div>
-            <Label>HbA1c</Label>
-            <HoverCard
-              trigger={<Info className="h-4 w-4 text-font-secondary" />}
-              placement="top"
-            >
-              <div className="font-semibold mb-1">What is HbA1c?</div>
-              <p className="text-font-secondary">
-                HbA1c is a blood test that measures your average blood sugar
-                levels over the past 2 to 3 months. It’s used to diagnose and
-                monitor diabetes.
-              </p>
-            </HoverCard>
+            <div className="flex items-center gap-2">
+              <Label>HbA1c</Label>
+              <HoverCard
+                trigger={<Info className="h-4 w-4 text-font-secondary" />}
+                placement="top"
+              >
+                <div className="font-semibold mb-1">Was ist HbA1c?</div>
+                <p className="text-font-secondary">
+                  HbA1c misst den durchschnittlichen Blutzucker der letzten
+                  2-3&nbsp;Monate. Der Wert wird zur Diagnose und
+                  Verlaufskontrolle von Diabetes genutzt.
+                </p>
+              </HoverCard>
+            </div>
             <div className="mt-2">
               <NumberInput
                 value={form.hba1c}
                 onChange={(v) => set("hba1c", v)}
-                placeholder="e.g., 5.6"
+                placeholder="z. B. 5.6"
                 min={LIMITS.hba1c.min}
                 max={LIMITS.hba1c.max}
                 unit="%"
               />
             </div>
-            <Help>Typical bands: &lt;5.7, 5.7–6.4, ≥6.5.</Help>
+            <Help>Typische Bereiche: &lt;5,7 · 5,7-6,4 · ≥6,5.</Help>
           </div>
         )}
 
+        {/* LDL */}
         <div>
-          <Label>LDL</Label>
-          <HoverCard
-            trigger={<Info className="h-4 w-4 text-font-secondary" />}
-            placement="top"
-          >
-            <div className="font-semibold mb-1">What is LDL?</div>
-            <p className="text-font-secondary">
-              LDL (low-density lipoprotein) is a type of cholesterol that can
-              build up in your arteries and increase your risk of heart disease.
-              It’s often referred to as “bad” cholesterol.
-            </p>
-          </HoverCard>
-          <NumberInput
-            value={form.ldl}
-            onChange={(v) => set("ldl", v)}
-            placeholder="e.g., 110"
-            min={LIMITS.ldl.min}
-            max={LIMITS.ldl.max}
-            unit="mg/dL"
-          />
+          <div className="flex items-center gap-2">
+            <Label>LDL</Label>
+            <HoverCard
+              trigger={<Info className="h-4 w-4 text-font-secondary" />}
+              placement="top"
+            >
+              <div className="font-semibold mb-1">Was ist LDL?</div>
+              <p className="text-font-secondary">
+                LDL („schlechtes“ Cholesterin) kann sich in den Arterien
+                ablagern und das Herz-Kreislauf-Risiko erhöhen.
+              </p>
+            </HoverCard>
+          </div>
+          <div className="mt-2">
+            <NumberInput
+              value={form.ldl}
+              onChange={(v) => set("ldl", v)}
+              placeholder="z. B. 110"
+              min={LIMITS.ldl.min}
+              max={LIMITS.ldl.max}
+              unit="mg/dL"
+            />
+          </div>
         </div>
 
+        {/* HDL */}
         <div>
-          <Label>HDL</Label>
-          <HoverCard
-            trigger={<Info className="h-4 w-4 text-font-secondary" />}
-            placement="top"
-          >
-            <div className="font-semibold mb-1">What is HDL?</div>
-            <p className="text-font-secondary">
-              HDL (high-density lipoprotein) is a type of cholesterol that helps
-              remove other forms of cholesterol from your bloodstream. It’s
-              often referred to as “good” cholesterol.
-            </p>
-          </HoverCard>
-          <NumberInput
-            value={form.hdl}
-            onChange={(v) => set("hdl", v)}
-            placeholder="e.g., 50"
-            min={LIMITS.hdl.min}
-            max={LIMITS.hdl.max}
-            unit="mg/dL"
-          />
+          <div className="flex items-center gap-2">
+            <Label>HDL</Label>
+            <HoverCard
+              trigger={<Info className="h-4 w-4 text-font-secondary" />}
+              placement="top"
+            >
+              <div className="font-semibold mb-1">Was ist HDL?</div>
+              <p className="text-font-secondary">
+                HDL („gutes“ Cholesterin) hilft, überschüssiges Cholesterin aus
+                dem Blut zu entfernen.
+              </p>
+            </HoverCard>
+          </div>
+          <div className="mt-2">
+            <NumberInput
+              value={form.hdl}
+              onChange={(v) => set("hdl", v)}
+              placeholder="z. B. 50"
+              min={LIMITS.hdl.min}
+              max={LIMITS.hdl.max}
+              unit="mg/dL"
+            />
+          </div>
         </div>
       </div>
     </Card>

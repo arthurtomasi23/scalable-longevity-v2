@@ -21,7 +21,7 @@ export default function Segment<T extends string>({
             type="button"
             onClick={() => onChange(opt.value)}
             className={clsx(
-              "rounded-full px-4 py-2 text-sm font-medium transition border",
+              "rounded-full px-4 py-2 text-base font-medium transition border",
               active
                 ? "bg-primary border-primary text-white"
                 : "bg-white border-card-border text-font-primary hover:bg-white/70"

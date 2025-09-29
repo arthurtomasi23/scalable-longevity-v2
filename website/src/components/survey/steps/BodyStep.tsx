@@ -1,8 +1,8 @@
 // components/survey/steps/BodyStep.tsx
 "use client";
-import Card from "@/components/ui/Card";
-import NumberInput from "@/components/ui/NumberInput";
-import { Label, Help } from "@/components/ui/Label";
+import Card from "@/components/survey/Card";
+import NumberInput from "@/components/survey/NumberInput";
+import { Label, Help } from "@/components/survey/Label";
 import { LIMITS } from "@/lib/surveyConfig";
 import type { FormState } from "@/lib/surveyTypes";
 import { useMemo } from "react";
@@ -24,53 +24,56 @@ export default function BodyStep({
 
   return (
     <Card>
-      <Label>Body Metrics</Label>
-      <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <Label>Körpermaße</Label>
+      <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-3">
         <div>
-          <Label>Height</Label>
+          <Label>Größe</Label>
           <NumberInput
             value={form.height_cm}
             onChange={(v) => set("height_cm", v)}
-            placeholder="e.g., 176"
+            placeholder="z. B. 176"
             min={LIMITS.height_cm.min}
             max={LIMITS.height_cm.max}
             unit="cm"
           />
         </div>
         <div>
-          <Label>Weight</Label>
+          <Label>Gewicht</Label>
           <NumberInput
             value={form.weight_kg}
             onChange={(v) => set("weight_kg", v)}
-            placeholder="e.g., 72"
+            placeholder="z. B. 72"
             min={LIMITS.weight_kg.min}
             max={LIMITS.weight_kg.max}
             unit="kg"
           />
         </div>
         <div>
-          <Label>Waist Circumference</Label>
+          <Label>Taillenumfang</Label>
           <NumberInput
             value={form.waist_cm}
             onChange={(v) => set("waist_cm", v)}
-            placeholder="e.g., 84"
+            placeholder="z. B. 84"
             min={LIMITS.waist_cm.min}
             max={LIMITS.waist_cm.max}
             unit="cm"
           />
           <Help>
-            Measure at the belly button. Thresholds differ: &lt;80cm (F) /
-            &lt;94cm (M).
+            Am Bauchnabel messen. Grenzwerte: &lt;80&nbsp;cm (F) /
+            &lt;94&nbsp;cm (M).
           </Help>
         </div>
       </div>
 
-      <div className="mt-4 text-sm text-font-secondary">
-        BMI:{" "}
+      {/* BMI pill */}
+      <div className="mt-6 flex items-center gap-2 text-base">
+        <span className="text-font-secondary">BMI:</span>
         {bmi ? (
-          <span className="font-semibold text-font-primary">{bmi}</span>
+          <span className="px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold">
+            {bmi}
+          </span>
         ) : (
-          "—"
+          <span className="text-font-secondary">—</span>
         )}
       </div>
     </Card>

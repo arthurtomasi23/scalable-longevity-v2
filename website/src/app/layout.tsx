@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import "./globals.css";
 import HeaderNav from "../components/ui/HeaderNav";
-import Footer from "../components/Footer";
+import Footer from "../components/ui/Footer";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Variable.woff2",
