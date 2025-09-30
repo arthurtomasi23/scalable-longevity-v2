@@ -5,68 +5,72 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-20">
-        {/* Hero */}
+        {/* Aufmacher */}
         <h1 className="text-4xl font-bold text-font-primary mb-4">
-          Unlock More Life - Simple Changes for Lasting Well-Being
+          Mehr Lebenszeit
         </h1>
         <p className="text-lg text-font-secondary max-w-2xl">
-          Healthy living doesn’t have to be complicated. We make it simple,
-          sustainable, and empowering.
+          Einfach gesünder Leben Tag für Tag.
         </p>
 
-        {/* Why Choose Us */}
+        {/* Warum wir */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
-            Why Choose Us?
+            Warum wir?
           </h2>
           <ul className="space-y-3 text-font-secondary">
-            <li>• No pills or supplements - just better everyday choices.</li>
             <li>
-              • Easy to set up and use, whether you’re just starting or looking
-              for new ways to improve.
+              • Keine Pillen oder Nahrungsergänzungsmittel - nur bessere
+              Alltagsentscheidungen.
             </li>
             <li>
-              • Backed by science, designed to fit into your life - no
-              complicated routines or special equipment.
+              • Einfach einzurichten und zu nutzen - egal, ob du gerade erst
+              beginnst oder nach neuen Wegen zur Verbesserung suchst.
+            </li>
+            <li>
+              • Wissenschaftlich fundiert, gemacht für deinen Alltag - keine
+              komplizierten Routinen oder spezielle Ausrüstung.
             </li>
           </ul>
         </section>
 
-        {/* For You */}
+        {/* Für dich */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
-            For You
+            Für dich
           </h2>
           <p className="text-font-secondary max-w-2xl">
-            You’re working to improve your own health? We make it simple to get
-            started and keep going. Our goal is to help you feel empowered,
-            supported, and confident in your ability to build the habits that
-            matter.
+            Du arbeitest daran, deine Gesundheit zu verbessern? Wir machen den
+            Einstieg und das Dranbleiben einfach. Unser Ziel ist, dass du dich
+            befähigt, unterstützt und sicher fühlst, die Gewohnheiten
+            aufzubauen, die wirklich zählen.
           </p>
         </section>
 
-        {/* Your Next Step */}
+        {/* Dein nächster Schritt */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
-            Your Next Step
+            Dein nächster Schritt
           </h2>
           <p className="text-font-secondary max-w-2xl">
-            Start today with just one small change—and watch how your daily
-            choices add up to a healthier, longer life. We’re here to guide you,
-            encourage you, and celebrate every step forward.
+            Starte heute mit einer kleinen Veränderung - und sieh, wie sich
+            deine täglichen Entscheidungen zu einem gesünderen, längeren Leben
+            summieren. Wir sind da, um dich zu begleiten, zu ermutigen und jeden
+            Schritt nach vorn zu feiern.
           </p>
         </section>
 
-        {/* Mission */}
+        {/* Unsere Mission */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
-            Our Mission
+            Unsere Mission
           </h2>
           <p className="text-font-secondary max-w-2xl">
-            We want to help you live a longer, healthier life—starting with the
-            habits you build every day. Our app is designed to make healthy
-            living easy and clear, so you know exactly what steps to take to
-            feel your best and keep improving without being overwhelming.
+            Wir wollen dir helfen, länger und gesünder zu leben - beginnend mit
+            den Gewohnheiten, die du jeden Tag aufbaust. Unsere App ist darauf
+            ausgelegt, gesundes Leben einfach und übersichtlich zu machen, damit
+            du genau weißt, welche Schritte du gehen kannst, um dich besser zu
+            fühlen und dich ohne Überforderung stetig weiterzuentwickeln.
           </p>
         </section>
       </div>

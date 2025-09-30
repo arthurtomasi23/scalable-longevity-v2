@@ -5,9 +5,10 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-20">
-        <h1 className="text-3xl font-semibold text-font-primary">Contact</h1>
+        <h1 className="text-3xl font-semibold text-font-primary">Kontakt</h1>
         <p className="mt-1 text-font-secondary">
-          Got a question or feedback? We’d love to hear from you.
+          Haben Sie Fragen oder Feedback? Wir würden uns freuen, von Ihnen zu
+          hören.
         </p>
 
         <form className="mt-8 rounded-2xl border border-card-border bg-card p-6 shadow-sm grid gap-4">
@@ -35,7 +36,7 @@ export default function ContactPage() {
 
           <div className="grid gap-2">
             <label className="text-sm font-medium text-font-primary">
-              Message
+              Nachricht
             </label>
             <textarea
               placeholder="How can we help?"
@@ -49,12 +50,15 @@ export default function ContactPage() {
               type="submit"
               className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white transition hover:bg-primary/90"
             >
-              Send Message
+              Nachricht Senden
             </button>
             <p className="text-xs text-font-secondary">
-              Prefer email?{" "}
-              <a href="mailto:contact@example.com" className="underline">
-                contact@example.com
+              Bevorzugen Sie E-Mail?{" "}
+              <a
+                href="mailto:kontakt@scalable-longevity.com"
+                className="underline"
+              >
+                kontakt@scalable-longevity.com
               </a>
             </p>
           </div>
