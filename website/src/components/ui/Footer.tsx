@@ -2,13 +2,13 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-black/80 border-t border-card-border px-6 py-12">
+    <footer className="bg-black/80 px-6 py-12">
       <div className="mx-auto max-w-6xl flex flex-col gap-12">
         {/* Links */}
         <div className="grid grid-cols-1 gap-8 text-sm text-font-secondary sm:grid-cols-3">
           <div>
             <h4 className="mb-2 font-semibold text-white">Kontakt</h4>
-            <p>Email: contact@scalablelongevity.com</p>
+            <p>Email: kontakt@scalable-longevity.com</p>
             <p>Telefon: +49 234 567 890</p>
           </div>
 
@@ -20,11 +20,11 @@ export default function Footer() {
                   Über Uns
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/careers" className="hover:underline">
                   Karriere
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="/privacy" className="hover:underline">
                   Datenschutz

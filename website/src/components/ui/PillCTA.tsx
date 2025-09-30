@@ -146,7 +146,7 @@ export function PillCTA({
     <button
       type="button"
       onClick={handleClick}
-      className={`${base} ${className}`}
+      className={`${base} ${className} cursor-pointer`}
       style={style}
       disabled={disabled}
       aria-label={label}

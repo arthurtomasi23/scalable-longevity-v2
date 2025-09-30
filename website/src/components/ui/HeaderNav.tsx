@@ -42,8 +42,8 @@ export default function HeaderNav() {
         <div className="ml-auto hidden md:block">
           <PillCTA
             as="link"
-            href="/get-started"
-            label="Jetzt Starten"
+            href="/survey"
+            label="Test Starten"
             size="sm"
             bgClass="bg-primary"
             textClass="text-white"
@@ -55,8 +55,8 @@ export default function HeaderNav() {
         <div className="ml-auto md:hidden">
           <PillCTA
             as="link"
-            href="/get-started"
-            label="Jetzt Starten"
+            href="/survey"
+            label="Test Starten"
             size="sm"
             bgClass="bg-primary"
             textClass="text-white"

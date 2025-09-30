@@ -13,21 +13,75 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Scalable - Unlock More Life",
-  description: "Simple Changes for lasting Well-Being",
+  title: "Scalable - Mehr Lebenszeit",
+  description: "Einfach gesünder Leben Tag für Tag.",
+  keywords: [
+    "Longevity",
+    "Gesundheit",
+    "Biologisches Alter",
+    "Umfrage",
+    "Lebensstil verbessern",
+  ],
+  authors: [{ name: "Scalable Team", url: "https://scalable-longevity.com" }],
+  metadataBase: new URL("https://scalable-longevity.com"),
+  openGraph: {
+    title: "Scalable - Mehr Lebenszeit",
+    description:
+      "Dein Weg zu mehr Lebenszeit. Einfach. Verständlich. Wissenschaftlich fundiert.",
+    url: "https://scalable-longevity.com",
+    siteName: "Scalable",
+    images: [
+      {
+        url: "/background.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Scalable - Mehr Lebenszeit",
+      },
+    ],
+    locale: "de_DE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Scalable - Mehr Lebenszeit",
+    description: "Simple Changes für langfristiges Wohlbefinden.",
+    images: ["/background.jpg"],
+    creator: "@deinTwitterHandle",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html lang="de">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Scalable",
+              url: "https://scalable-longevity.com",
+              logo: "https://scalable-longevity.com/logo.png",
+            }),
+          }}
+        />
+      </head>
       <body className={`${satoshi.variable} antialiased`}>
         <HeaderNav />
         {children}
         <Footer />
-        <Analytics /> {/* page views + events */}
-        <SpeedInsights /> {/* performance metrics */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
