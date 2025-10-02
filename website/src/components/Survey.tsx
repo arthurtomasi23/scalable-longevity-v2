@@ -22,7 +22,7 @@ export default function SurveyCTA() {
       </div>
 
       {/* Cards: same height, buttons aligned, cards hug content */}
-      <div className="mt-12 flex flex-col md:flex-row justify-center items-stretch gap-8">
+      <div className="mt-12 flex flex-col-reverse md:flex-row justify-center items-stretch gap-8">
         {/* Paid / Subscription */}
         <div className="relative w-full max-w-md rounded-[30px] p-8 bg-primary text-white flex flex-col">
           <span className="absolute top-5 right-5 px-3 py-1 rounded-full bg-white/15 text-white text-sm font-semibold">

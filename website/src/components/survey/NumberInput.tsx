@@ -20,6 +20,7 @@ export default function NumberInput({
     <div className="flex items-center gap-3">
       <input
         type="number"
+        inputMode="numeric"
         min={min}
         max={max}
         value={value}

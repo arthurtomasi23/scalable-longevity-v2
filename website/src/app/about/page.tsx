@@ -9,16 +9,14 @@ export default function AboutPage() {
         <h1 className="text-4xl font-bold text-font-primary mb-4">
           Mehr Lebenszeit
         </h1>
-        <p className="text-lg text-font-secondary max-w-2xl">
-          Einfach gesünder Leben Tag für Tag.
-        </p>
+        <p className="text-lg max-w-2xl">Einfach gesünder Leben Tag für Tag.</p>
 
         {/* Warum wir */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
             Warum wir?
           </h2>
-          <ul className="space-y-3 text-font-secondary">
+          <ul className="space-y-3">
             <li>
               • Keine Pillen oder Nahrungsergänzungsmittel - nur bessere
               Alltagsentscheidungen.
@@ -39,7 +37,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
             Für dich
           </h2>
-          <p className="text-font-secondary max-w-2xl">
+          <p className="max-w-2xl">
             Du arbeitest daran, deine Gesundheit zu verbessern? Wir machen den
             Einstieg und das Dranbleiben einfach. Unser Ziel ist, dass du dich
             befähigt, unterstützt und sicher fühlst, die Gewohnheiten
@@ -52,7 +50,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
             Dein nächster Schritt
           </h2>
-          <p className="text-font-secondary max-w-2xl">
+          <p className="max-w-2xl">
             Starte heute mit einer kleinen Veränderung - und sieh, wie sich
             deine täglichen Entscheidungen zu einem gesünderen, längeren Leben
             summieren. Wir sind da, um dich zu begleiten, zu ermutigen und jeden
@@ -65,7 +63,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-font-primary mb-4">
             Unsere Mission
           </h2>
-          <p className="text-font-secondary max-w-2xl">
+          <p className="max-w-2xl">
             Wir wollen dir helfen, länger und gesünder zu leben - beginnend mit
             den Gewohnheiten, die du jeden Tag aufbaust. Unsere App ist darauf
             ausgelegt, gesundes Leben einfach und übersichtlich zu machen, damit

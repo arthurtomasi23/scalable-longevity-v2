@@ -31,7 +31,6 @@ const STEPS: Step[] = [
 ];
 
 const CONNECTOR_COUNT = STEPS.length - 1;
-const OFFSET = 5; // px extra scroll before numbers / lines activate
 
 export default function CTA() {
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -42,6 +41,19 @@ export default function CTA() {
     Array(CONNECTOR_COUNT).fill(0)
   );
   const [step1Active, setStep1Active] = useState(false);
+
+  // Earlier activation on mobile: use a more permissive (negative) offset
+  const [offset, setOffset] = useState<number>(5);
+  useEffect(() => {
+    const computeOffset = () => {
+      const isMobile = window.matchMedia("(max-width: 640px)").matches;
+      // Negative = start earlier than center on mobile
+      setOffset(isMobile ? -200 : 5);
+    };
+    computeOffset();
+    window.addEventListener("resize", computeOffset);
+    return () => window.removeEventListener("resize", computeOffset);
+  }, []);
 
   // Measure connector heights once
   useEffect(() => {
@@ -68,7 +80,7 @@ export default function CTA() {
       if (step1Node) {
         const r = step1Node.getBoundingClientRect();
         const center = r.top + r.height / 2;
-        setStep1Active(center <= viewportCenter - OFFSET);
+        setStep1Active(center <= viewportCenter - offset);
       }
 
       setLineHeights((prev) => {
@@ -79,8 +91,8 @@ export default function CTA() {
           const rect = contentRefs.current[0]!.getBoundingClientRect();
           const elemCenter = rect.top + rect.height / 2;
 
-          if (elemCenter <= viewportCenter - OFFSET) {
-            const raw = viewportCenter - OFFSET - elemCenter;
+          if (elemCenter <= viewportCenter - offset) {
+            const raw = viewportCenter - offset - elemCenter;
             next[0] = Math.max(0, Math.min(raw, targetHeights[0] || 0));
           } else {
             next[0] = 0;
@@ -96,7 +108,7 @@ export default function CTA() {
             const rect = contentRefs.current[1]?.getBoundingClientRect();
             if (rect) {
               const elemCenter = rect.top + rect.height / 2;
-              const raw = viewportCenter - OFFSET - elemCenter;
+              const raw = viewportCenter - offset - elemCenter;
               const clamped = Math.max(0, Math.min(raw, targetHeights[1] || 0));
               next[1] = clamped;
             }
@@ -125,7 +137,7 @@ export default function CTA() {
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
     };
-  }, [targetHeights, lineHeights]);
+  }, [targetHeights, lineHeights, offset]);
 
   const connectorComplete = (i: number) =>
     targetHeights[i] > 0 && lineHeights[i] >= targetHeights[i] - 0.5;

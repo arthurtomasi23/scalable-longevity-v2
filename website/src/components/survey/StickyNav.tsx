@@ -19,7 +19,7 @@ export default function StickyNav({
   onSubmit: () => void;
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-black/20 backdrop-blur-3xl">
+    <div className="fixed inset-x-0 bottom-0 bg-card">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3">
         <div className="text-base text-font-secondary">
           Musst du aufhören? Im nächsten Schritt kannst du ein Konto erstellen
