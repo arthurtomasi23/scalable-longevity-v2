@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import HeaderNav from "../components/ui/HeaderNav";
 import Footer from "../components/ui/Footer";
+import CookieBanner from "../components/ui/CookieBanner";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Variable.woff2",
@@ -25,9 +26,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Scalable Team", url: "https://scalable-longevity.com" }],
   metadataBase: new URL("https://scalable-longevity.com"),
   openGraph: {
-    title: "Scalable - Mehr Lebenszeit",
+    title: "Scalable - Mehr gesunde Lebenszeit",
     description:
-      "Dein Weg zu mehr Lebenszeit. Einfach. Verständlich. Wissenschaftlich fundiert.",
+      "Dein Weg zu mehr gesunder Lebenszeit. Einfach. Verständlich. Wissenschaftlich fundiert.",
     url: "https://scalable-longevity.com",
     siteName: "Scalable",
     images: [
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
         url: "/background.jpg",
         width: 1200,
         height: 630,
-        alt: "Scalable - Mehr Lebenszeit",
+        alt: "Scalable - Mehr gesunde Lebenszeit",
       },
     ],
     locale: "de_DE",
@@ -80,6 +81,8 @@ export default function RootLayout({
         <HeaderNav />
         {children}
         <Footer />
+        <CookieBanner />
+
         <Analytics />
         <SpeedInsights />
       </body>

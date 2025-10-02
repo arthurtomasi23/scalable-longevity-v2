@@ -23,16 +23,16 @@ export default function HeaderNav() {
           aria-label="Main"
         >
           <nav className="flex items-center gap-2">
-            <Link href="#principles" scroll className={navLinkBase}>
+            <Link href="/#principles" className={navLinkBase}>
               Säulen
             </Link>
-            <Link href="#how-it-works" scroll className={navLinkBase}>
+            <Link href="/#how-it-works" className={navLinkBase}>
               Wie funktioniert&#39;s?
             </Link>
-            <Link href="#fiveparts" scroll className={navLinkBase}>
+            <Link href="/#fiveparts" className={navLinkBase}>
               Handlungsfelder
             </Link>
-            <Link href="#survey" scroll className={navLinkBase}>
+            <Link href="/#survey" className={navLinkBase}>
               Umfrage
             </Link>
           </nav>
