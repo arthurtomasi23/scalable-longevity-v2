@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="mt-8">
           <PillCTA
             as="link"
-            href="/get-started"
+            href="/survey"
             label="Mit Scalable Starten"
             bgClass="bg-black/40 hover:bg-black/30"
             textClass="text-white"
@@ -35,7 +35,7 @@ export default function Hero() {
             iconColorClass="text-white"
             size="md"
             track={{
-              event: "get_started_click",
+              event: "start_test_click",
               from: "home_hero",
               variant: "primary",
             }}
