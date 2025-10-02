@@ -33,8 +33,9 @@ export default function Principles() {
         </h2>
         {/* Lead text → 20px target */}
         <p className="flex font-medium text-center text-xl max-w-3xl mt-4">
-          Diese drei Säulen sind das Fundament, auf dem echte Änderungen
-          entstehen und wir helfen Ihnen dabei diese aufzubauen!
+          Diese drei Säulen sind das Fundament, auf dem echte Veränderung, hin
+          zu einer gesunden Alterungsreise entsteht und wir helfen Ihnen dabei
+          diese aufzubauen!
         </p>
       </div>
 

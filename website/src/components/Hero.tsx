@@ -15,12 +15,12 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 flex flex-col items-center text-center">
         {/* Heading */}
         <h1 className="text-white font-semibold leading-tight tracking-tight text-5xl md:text-7xl">
-          Mehr Lebenszeit
+          Mehr gesunde Lebenszeit
         </h1>
 
         {/* Lead */}
         <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
-          Einfach gesünder Leben Tag für Tag
+          Optimieren Sie Ihre „Healthspan“
         </p>
 
         {/* CTA */}

@@ -20,8 +20,8 @@ export default function StickyNav({
 }) {
   return (
     <div className="fixed inset-x-0 bottom-0 bg-card">
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3">
-        <div className="text-base text-font-secondary">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-end md:justify-between px-4 py-3">
+        <div className="hidden md:block text-base text-font-secondary">
           Musst du aufhören? Im nächsten Schritt kannst du ein Konto erstellen
           und deinen Fortschritt speichern.
         </div>
@@ -34,7 +34,7 @@ export default function StickyNav({
             onClick={onBack}
             disabled={!canBack}
             bgClass="bg-transparent border border-card-border hover:bg-white/60 hover:text-font-primary"
-            textClass="text-white"
+            textClass="text-font-primary"
           />
 
           {!atEnd ? (

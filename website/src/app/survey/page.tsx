@@ -160,11 +160,12 @@ export default function SurveyPage() {
         {!preview && (
           <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-6 text-center">
             <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
-              Mini-Umfrage
+              Selbsttest
             </h1>
             <p className="mt-4 text-xl text-font-primary/80">
-              Eine kurze Vorschau, um die Treiber deines biologischen Alters
-              einzuschätzen. Am Ende kannst du deine Ergebnisse speichern.
+              Dein Selbsttest erlaubt Dir Deine persönlichen Handlungsfelder zu
+              identizieren, um Deine gesunde Lebenspanne (=Healthspan) zu
+              optimieren.
             </p>
 
             {/* Progress */}
@@ -176,7 +177,7 @@ export default function SurveyPage() {
                 />
               </div>
               <div className="mt-2 text-base text-white">
-                Schritt {step + 1} von {STEPS.length} — {STEPS[step].title}
+                Schritt {step + 1} von {STEPS.length}
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 const items = [
   {
     key: "wissen",
-    title: "Wissen",
+    title: "Prävention",
     text: "Verstehen, was wirklich hilft.",
     img: "/knowledge.jpg",
   },
@@ -23,13 +23,13 @@ const items = [
   },
   {
     key: "schlaf",
-    title: "Schlaf",
+    title: "Erholung & Stress-Balance",
     text: "Regeneration als Superpower.",
     img: "/sleep.jpg",
   },
   {
     key: "mindset",
-    title: "Social",
+    title: "Sinn & Soziale Interaktionen",
     text: "Mit Freunden wachsen.",
     img: "/social.jpg",
   },

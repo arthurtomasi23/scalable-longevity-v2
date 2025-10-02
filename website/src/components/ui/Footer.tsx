@@ -8,8 +8,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 text-sm text-font-secondary sm:grid-cols-3">
           <div>
             <h4 className="mb-2 font-semibold text-white">Kontakt</h4>
-            <p>Email: kontakt@scalable-longevity.com</p>
-            <p>Telefon: +49 234 567 890</p>
+            <p>SLS GmbH</p>
+            <p>Breite Str. 22</p>
+            <p>40213 Düsseldorf</p>
+            <p>Germany</p>
+            <p>Telefon: +49 201 1540 7473 22</p>
           </div>
 
           <div>
@@ -20,11 +23,6 @@ export default function Footer() {
                   Über Uns
                 </a>
               </li>
-              {/* <li>
-                <a href="/careers" className="hover:underline">
-                  Karriere
-                </a>
-              </li> */}
               <li>
                 <a href="/privacy" className="hover:underline">
                   Datenschutz

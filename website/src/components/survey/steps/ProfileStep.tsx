@@ -29,7 +29,7 @@ export default function ProfileStep({
       </div>
 
       <div className="mt-6">
-        <Label>Geschlecht</Label>
+        <Label>Biologisches Geschlecht</Label>
         <Help>
           Wird für geschlechtsspezifische Grenzwerte genutzt (z. B.
           Taillenumfang).
@@ -41,7 +41,6 @@ export default function ProfileStep({
             options={[
               { label: "Weiblich", value: "female" },
               { label: "Männlich", value: "male" },
-              { label: "Divers", value: "diverse" },
             ]}
           />
         </div>

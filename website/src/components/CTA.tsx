@@ -12,20 +12,20 @@ type Step = {
 const STEPS: Step[] = [
   {
     id: 1,
-    title: "Formular ausfüllen",
-    text: "Sie füllen ein kurzes Formular aus, um Ihre aktuelle Situation einzuschätzen.",
+    title: "Selbsttest ausfüllen",
+    text: "Du füllst einen kurzen Selbsttest aus, um deine aktuellen Handlungsfelder zu analysieren.",
     tailwindHeightClass: "h-30",
   },
   {
     id: 2,
-    title: "Ihr Ergebnis wird analysiert",
-    text: "Ihre gesammelten Daten werden von unserem Algorithmus ausgewertet, um Ihnen den optimalen Plan für eine bessere Gesundheit ab heute zu geben!",
+    title: "Dein Ergebnis wird analysiert",
+    text: "Deine gesammelten Daten werden von unserem Algorithmus ausgewertet, um herauszufinden, welche Effekte du mit neuen Interventionen in deinen Handlungsfeldern erwarten kannst.",
     tailwindHeightClass: "h-30",
   },
   {
     id: 3,
-    title: "Beginnen Sie mit neuen Gewohnheiten",
-    text: "Jetzt, da Sie die perfekte Roadmap haben, hilft Ihnen unser System dabei, die neuen Gewohnheiten beizubehalten, die Ihr Leben verändern werden!",
+    title: "Starten und verfestigen neuer Gewohnheiten",
+    text: "Jetzt, da du die perfekte Roadmap haben, hilft Ihnen unser System dabei, die neuen Gewohnheiten beizubehalten, die Ihr Leben verändern werden!",
     tailwindHeightClass: "h-30",
   },
 ];

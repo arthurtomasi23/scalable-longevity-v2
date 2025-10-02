@@ -11,11 +11,11 @@ export default function Newsletter() {
       <div className="flex flex-col justify-center items-center max-w-4xl text-center">
         {/* Smaller on mobile, 50px target on desktop */}
         <h2 className="text-3xl md:text-5xl font-medium">
-          Bleiben Sie immer auf dem neuesten Stand und verpassen Sie nichts!
+          Bleibe immer auf dem neuesten Stand und verpasse nichts!
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-4">
-          Uns ist wichtig, dass Sie immer Zugang zu den neuesten Updates und
-          Informationen haben.
+          Abonniere unseren Newsletter und erhalte regelmäßig Updates, Tipps und
+          Angebote - kein Spam, jederzeit abbestellbar.
         </p>
       </div>
 
