@@ -20,7 +20,7 @@ export default function Hero() {
 
         {/* Lead */}
         <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
-          Optimieren Sie Ihre „Healthspan“
+          Optimieren deine „Healthspan“
         </p>
 
         {/* CTA */}

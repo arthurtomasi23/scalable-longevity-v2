@@ -6,17 +6,17 @@ const items = [
   {
     key: "insightHub",
     title: "Insight Hub",
-    text: "Wir helfen Ihnen zu verstehen, was Sie noch heute tun können, um Ihre Healthspan direkt zu verbessern",
+    text: "Wir helfen dir zu verstehen, was du noch heute tun kannst, um deine Healthspan direkt zu verbessern",
   },
   {
     key: "lifePathAnalyzer",
     title: "Life Path Analyzer",
-    text: "Wir analysieren Ihr aktuelles Verhalten und finden heraus, was genau Ihnen helfen kann, sich besser zu fühlen und länger zu leben",
+    text: "Wir analysieren dein aktuelles Verhalten und finden heraus, was genau dir helfen kann, sich besser zu fühlen und länger zu leben",
   },
   {
     key: "habitEngine",
     title: "Habit Engine",
-    text: "Mit unserer Habit Engine entwickeln wir gesunde Gewohnheiten für Sie, die Sie tatsächlich beibehalten können!",
+    text: "Mit unserer Habit Engine entwickeln wir gesunde Gewohnheiten für dich, die du tatsächlich beibehalten kannst!",
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Principles() {
         {/* Lead text → 20px target */}
         <p className="flex font-medium text-center text-xl max-w-3xl mt-4">
           Diese drei Säulen sind das Fundament, auf dem echte Veränderung, hin
-          zu einer gesunden Alterungsreise entsteht und wir helfen Ihnen dabei
+          zu einer gesunden Alterungsreise entsteht und wir helfen dir dabei,
           diese aufzubauen!
         </p>
       </div>

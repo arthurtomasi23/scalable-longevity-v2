@@ -25,7 +25,7 @@ const STEPS: Step[] = [
   {
     id: 3,
     title: "Starten und verfestigen neuer Gewohnheiten",
-    text: "Jetzt, da du die perfekte Roadmap haben, hilft Ihnen unser System dabei, die neuen Gewohnheiten beizubehalten, die Ihr Leben verändern werden!",
+    text: "Jetzt, da du die perfekte Roadmap hast, hilft dir unser System dabei, die neuen Gewohnheiten beizubehalten, die dein Leben verändern werden!",
     tailwindHeightClass: "h-30",
   },
 ];
@@ -158,9 +158,9 @@ export default function CTA() {
       id="how-it-works"
       className="scroll-mt-[5vh] flex flex-col justify-center items-center gap-10 p-6 sm:p-30"
     >
-      <p className="text-3xl text-font-secondary">Ihre Reise</p>
+      <p className="text-3xl text-font-secondary">Deine Reise</p>
       <h2 className="text-[clamp(1.75rem,6vw,3.75rem)] font-semibold">
-        Wie fangen Sie an?
+        Wie fängst du an?
       </h2>
       <div className="w-full flex flex-row">
         {/* LEFT: Numbers + connectors */}

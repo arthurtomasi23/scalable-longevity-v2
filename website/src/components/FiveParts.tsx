@@ -24,7 +24,7 @@ const items = [
   {
     key: "schlaf",
     title: "Erholung & Stress-Balance",
-    text: "Regeneration als Superpower.",
+    text: "Versteckte Superpower.",
     img: "/sleep.jpg",
   },
   {
@@ -45,7 +45,7 @@ export default function FiveParts() {
         <h2 className="text-4xl md:text-5xl font-medium">
           Was können wir verändern?
         </h2>
-        <p className="font-medium text-xl max-w-4xl">
+        <p className="font-medium text-xl max-w-4xl mt-4">
           Wir arbeiten mit 5 Handlungsfeldern die dein Leben komplett umkrempeln
           können. Diese Handlungsfelder sind...
         </p>
@@ -72,7 +72,7 @@ export default function FiveParts() {
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.9) 100%)",
               }}
             />
 
