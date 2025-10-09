@@ -14,13 +14,13 @@ export default function Hero() {
       {/* content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 flex flex-col items-center text-center">
         {/* Heading */}
-        <h1 className="text-white font-semibold leading-tight tracking-tight text-5xl md:text-7xl">
-          Mehr gesunde Lebenszeit
+        <h1 className="text-white font-semibold leading-tight tracking-tight w-5xl text-5xl md:text-7xl">
+          Du entscheidest, wie alt dein Körper wirklich ist
         </h1>
 
         {/* Lead */}
         <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
-          Optimieren deine „Healthspan“
+          Finde heraus, wie du jeden Tag an gesunder Lebenszeit gewinnst
         </p>
 
         {/* CTA */}
@@ -28,7 +28,7 @@ export default function Hero() {
           <PillCTA
             as="link"
             href="/survey"
-            label="Mit Scalable Starten"
+            label="Starte mit Longevity"
             bgClass="bg-black/40 hover:bg-black/30"
             textClass="text-white"
             iconBgClass="bg-primary"

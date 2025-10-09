@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
 import Image from "next/image";
@@ -6,32 +8,37 @@ const items = [
   {
     key: "wissen",
     title: "Prävention",
-    text: "Verstehen, was wirklich hilft.",
+    text: "Verstehe, welche Maßnahmen dein biologisches Alter senken und deine Gesundheit langfristig sichern.",
     img: "/knowledge.jpg",
+    position: "col-start-1 col-span-2 row-start-1 row-span-2",
   },
   {
     key: "bewegung",
     title: "Bewegung",
-    text: "Mehr Energie, weniger Schmerzen.",
+    text: "Verbessere Kraft, Mobilität und Energie mit personalisierten Bewegungsroutinen.",
     img: "/sport.jpg",
+    position: "col-start-3 col-span-2 row-start-1 row-span-1",
   },
   {
     key: "ernaehrung",
     title: "Ernährung",
-    text: "Essen, das wirklich hilft.",
+    text: "Entdecke Ernährungsstrategien, die Zellalterung verlangsamen und Vitalität fördern.",
     img: "/food.jpg",
+    position: "col-start-3 col-span-1 row-start-2 row-span-1",
   },
   {
     key: "schlaf",
     title: "Erholung & Stress-Balance",
-    text: "Versteckte Superpower.",
+    text: "Optimiere Schlaf und Regeneration für mehr Fokus und innere Stärke.",
     img: "/sleep.jpg",
+    position: "col-start-4 col-span-1 row-start-2 row-span-1",
   },
   {
     key: "mindset",
     title: "Sinn & Soziale Interaktionen",
-    text: "Mit Freunden wachsen.",
+    text: "Stärkere Verbindungen, mehr Lebensfreude - sozial gesund altern.",
     img: "/social.jpg",
+    position: "col-start-1 col-span-4 row-start-3 row-span-2",
   },
 ];
 
@@ -41,44 +48,53 @@ export default function FiveParts() {
       id="fiveparts"
       className="scroll-mt-[15vh] flex flex-col gap-10 text-black w-full px-6 md:px-20 min-h-[60vh]"
     >
+      {/* Header */}
       <div className="flex flex-col justify-center items-center text-center">
         <h2 className="text-4xl md:text-5xl font-medium">
-          Was können wir verändern?
+          Fünf Handlungsfelder,
+          <br /> die dein Leben nachhaltig verändern
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-4">
-          Wir arbeiten mit 5 Handlungsfeldern die dein Leben komplett umkrempeln
-          können. Diese Handlungsfelder sind...
+          Von Ernährung bis Erholung - wir helfen dir, in Balance zu leben und
+          deine Longevity-Ziele zu erreichen.
         </p>
       </div>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      {/* Bento Grid Layout */}
+      <div
+        className="
+          grid gap-4
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-4
+          auto-rows-[180px] md:auto-rows-[240px] xl:auto-rows-[260px]
+        "
+      >
         {items.map((it) => (
           <article
             key={it.key}
-            className="relative aspect-square rounded-[30px] overflow-hidden group cursor-pointer"
+            className={`relative overflow-hidden rounded-[30px] group cursor-pointer ${it.position}`}
           >
-            {/* BG image */}
+            {/* Background Image */}
             <Image
               src={it.img}
               alt={it.title}
               fill
-              className="object-cover"
-              priority={it.key === "wissen"}
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
 
-            {/* Overlay: transparent until 50%, then fade to dark */}
+            {/* Gradient Overlay */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.9) 100%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.9) 100%)",
               }}
             />
 
-            {/* Content: icon at top-right, text bottom-left */}
+            {/* Content */}
             <div className="absolute inset-0 p-6 flex flex-col justify-between">
-              {/* Top: icon */}
+              {/* Top-right icon */}
               <div className="flex justify-end -m-3">
                 <div className="flex justify-center items-center w-[60px] h-[60px] rounded-full bg-white/95 backdrop-blur-sm flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                   <ArrowUpRight
@@ -88,8 +104,8 @@ export default function FiveParts() {
                 </div>
               </div>
 
-              {/* Bottom: text */}
-              <div className="text-white h-17">
+              {/* Text */}
+              <div className="text-white">
                 <h3 className="text-xl leading-tight">{it.title}</h3>
                 <p className="text-base opacity-90">{it.text}</p>
               </div>

@@ -11,11 +11,11 @@ export default function Newsletter() {
       <div className="flex flex-col justify-center items-center max-w-4xl text-center">
         {/* Smaller on mobile, 50px target on desktop */}
         <h2 className="text-3xl md:text-5xl font-medium">
-          Bleibe immer auf dem neuesten Stand und verpasse nichts!
+          Bleib auf deinem Weg - mit Longevity-Tipps & Healthspan-Inspiration
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-4">
-          Abonniere unseren Newsletter und erhalte regelmäßig Updates, Tipps und
-          Angebote - kein Spam, jederzeit abbestellbar.
+          Abonniere unseren Newsletter und erhalte regelmäßig wissenschaftlich
+          fundierte Inhalte, Motivation und Praxiswissen.
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function Newsletter() {
         <PillCTA
           as="link"
           href="/get-started"
-          label="Abonnieren"
+          label="Tipps erhalten"
           size="md"
           bgClass="bg-primary"
           textClass="text-white"

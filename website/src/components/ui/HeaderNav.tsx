@@ -24,16 +24,16 @@ export default function HeaderNav() {
         >
           <nav className="flex items-center gap-2">
             <Link href="/#principles" className={navLinkBase}>
-              Säulen
+              Deine Grundlagen
             </Link>
             <Link href="/#how-it-works" className={navLinkBase}>
-              Wie funktioniert&#39;s?
+              Wie du startest
             </Link>
             <Link href="/#fiveparts" className={navLinkBase}>
-              Handlungsfelder
+              Gesundheitsfelder
             </Link>
             <Link href="/#survey" className={navLinkBase}>
-              Umfrage
+              Mach den Test
             </Link>
           </nav>
         </div>

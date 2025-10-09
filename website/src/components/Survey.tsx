@@ -12,12 +12,13 @@ export default function SurveyCTA() {
       {/* Heading + lead */}
       <div className="flex flex-col justify-center items-center text-center">
         <h2 className="text-4xl md:text-5xl font-medium">
-          Du willst jetzt schon eine Kostprobe unseres Tests?
+          Teste dein biologisches Alter - kostenlos und wissenschaftlich
+          fundiert
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-6">
-          Wir möchten dir ermöglichen, auch ganz ohne Bezahlung unseren Test zu
-          nutzen. Starte jetzt den Selbsttest und erfahre mehr über deinen
-          Körper und deine Gesundheit!
+          Finde heraus, wie jung dein Körper wirklich ist - und wie du deine
+          Healthspan Schritt für Schritt optimieren kannst. Deine Daten bleiben
+          privat - dein Fortschritt gehört nur dir.
         </p>
       </div>
 
@@ -46,10 +47,10 @@ export default function SurveyCTA() {
             </li>
 
             {[
-              "Wiederholte Testung und Speicherung",
-              "Lifepath-Analyzer-Zugriff",
-              "Habit-Building-Tool",
-              "'Fact-Sheet' Bibliothek",
+              "Wiederholte Tests & Fortschrittsmessung",
+              "Life Path Analyzer Zugriff",
+              "Habit Engine & tägliche Routinen",
+              "Zugriff zur „Fact Sheet“-Bibliothek",
             ].map((txt, i) => (
               <li
                 key={i}
@@ -68,7 +69,7 @@ export default function SurveyCTA() {
             <PillCTA
               as="link"
               href="/survey"
-              label="Selbsttest starten"
+              label="Jetzt biologisches Alter testen"
               size="md"
               bgClass="bg-transparent border border-primary hover:bg-primary/10"
               textClass="text-font-primary"
@@ -100,10 +101,10 @@ export default function SurveyCTA() {
           <ul className="space-y-2">
             {[
               "Selbsttest Deines Biologischen Alters",
-              "Wiederholte Testung und Speicherung",
-              "Lifepath-Analyzer-Zugriff",
-              "Habit-Building-Tool",
-              "'Fact-Sheet' Bibliothek",
+              "Wiederholte Tests & Fortschrittsmessung",
+              "Life Path Analyzer Zugriff",
+              "Habit Engine & tägliche Routinen",
+              "Zugriff zur „Fact Sheet“-Bibliothek",
             ].map((txt, i) => (
               <li key={i} className="flex items-center text-base">
                 <span className="mr-2 flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-white">

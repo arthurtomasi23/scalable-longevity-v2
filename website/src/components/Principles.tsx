@@ -6,17 +6,17 @@ const items = [
   {
     key: "insightHub",
     title: "Insight Hub",
-    text: "Wir helfen dir zu verstehen, was du noch heute tun kannst, um deine Healthspan direkt zu verbessern",
+    text: "Verstehe deine Gesundheitsdaten und pack das Wissen ein, das dich weiterbringt.",
   },
   {
     key: "lifePathAnalyzer",
     title: "Life Path Analyzer",
-    text: "Wir analysieren dein aktuelles Verhalten und finden heraus, was genau dir helfen kann, sich besser zu fühlen und länger zu leben",
+    text: "Analysiere deinen Weg, erkenne, was dich stärkt, und richte deinen Fokus auf das, was wirklich wirkt.",
   },
   {
     key: "habitEngine",
     title: "Habit Engine",
-    text: "Mit unserer Habit Engine entwickeln wir gesunde Gewohnheiten für dich, die du tatsächlich beibehalten kannst!",
+    text: "Bleib auf deinem Weg - mit Gewohnheiten, die dich tragen und deine Healthspan langfristig stärken.",
   },
 ];
 
@@ -29,13 +29,13 @@ export default function Principles() {
       <div className="flex flex-col justify-center items-center mb-10">
         {/* Section heading → 50px target */}
         <h2 className="flex text-4xl text-center md:text-5xl font-medium">
-          Unsere drei Säulen
+          Drei Säulen ein Ziel:
+          <br /> Dein längeres, gesünderes Leben
         </h2>
         {/* Lead text → 20px target */}
         <p className="flex font-medium text-center text-xl max-w-3xl mt-4">
-          Diese drei Säulen sind das Fundament, auf dem echte Veränderung, hin
-          zu einer gesunden Alterungsreise entsteht und wir helfen dir dabei,
-          diese aufzubauen!
+          Scalable Longevity kombiniert Wissen, Analyse und nachhaltige
+          Gewohnheiten - für messbare Fortschritte.
         </p>
       </div>
 
