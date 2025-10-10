@@ -4,6 +4,21 @@ import { ArrowUpRight } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 
+// Simple responsive hook
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = React.useState(false);
+
+  React.useEffect(() => {
+    const media = window.matchMedia(query);
+    const listener = () => setMatches(media.matches);
+    listener(); // set initial
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [query]);
+
+  return matches;
+}
+
 const items = [
   {
     key: "wissen",
@@ -43,6 +58,8 @@ const items = [
 ];
 
 export default function FiveParts() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
   return (
     <section
       id="fiveparts"
@@ -55,64 +72,96 @@ export default function FiveParts() {
           <br /> die dein Leben nachhaltig verändern
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-4">
-          Von Ernährung bis Erholung - wir helfen dir, in Balance zu leben und
+          Von Ernährung bis Erholung – wir helfen dir, in Balance zu leben und
           deine Longevity-Ziele zu erreichen.
         </p>
       </div>
 
-      {/* Bento Grid Layout */}
-      <div
-        className="
-          grid gap-4
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-4
-          auto-rows-[180px] md:auto-rows-[240px] xl:auto-rows-[260px]
-        "
-      >
-        {items.map((it) => (
-          <article
-            key={it.key}
-            className={`relative overflow-hidden rounded-[30px] group cursor-pointer ${it.position}`}
-          >
-            {/* Background Image */}
-            <Image
-              src={it.img}
-              alt={it.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-
-            {/* Gradient Overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.9) 100%)",
-              }}
-            />
-
-            {/* Content */}
-            <div className="absolute inset-0 p-6 flex flex-col justify-between">
-              {/* Top-right icon */}
-              <div className="flex justify-end -m-3">
-                <div className="flex justify-center items-center w-[60px] h-[60px] rounded-full bg-white/95 backdrop-blur-sm flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-                  <ArrowUpRight
-                    className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
-                    color="#2E4A3F"
-                  />
+      {/* Layout Switch */}
+      {isDesktop ? (
+        // 💻 DESKTOP — Bento Layout
+        <div
+          className="
+            grid gap-4
+            grid-cols-4
+            auto-rows-[240px] xl:auto-rows-[260px]
+          "
+        >
+          {items.map((it) => (
+            <article
+              key={it.key}
+              className={`relative overflow-hidden rounded-[30px] group cursor-pointer ${it.position}`}
+            >
+              <Image
+                src={it.img}
+                alt={it.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                priority={it.key === "wissen"}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.9) 100%)",
+                }}
+              />
+              <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                <div className="flex justify-end -m-3">
+                  <div className="flex justify-center items-center w-[60px] h-[60px] rounded-full bg-white/95 backdrop-blur-sm flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    <ArrowUpRight
+                      className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      color="#2E4A3F"
+                    />
+                  </div>
+                </div>
+                <div className="text-white">
+                  <h3 className="text-xl leading-tight">{it.title}</h3>
+                  <p className="text-base opacity-90">{it.text}</p>
                 </div>
               </div>
-
-              {/* Text */}
-              <div className="text-white">
-                <h3 className="text-xl leading-tight">{it.title}</h3>
-                <p className="text-base opacity-90">{it.text}</p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        // 📱 MOBILE — Stacked Layout
+        <div className="flex flex-col gap-4">
+          {items.map((it) => (
+            <article
+              key={it.key}
+              className="relative overflow-hidden rounded-[30px] group cursor-pointer min-h-[320px]"
+            >
+              <Image
+                src={it.img}
+                alt={it.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.9) 100%)",
+                }}
+              />
+              <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                <div className="flex justify-end -m-3">
+                  <div className="flex justify-center items-center w-[60px] h-[60px] rounded-full bg-white/95 backdrop-blur-sm flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    <ArrowUpRight
+                      className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      color="#2E4A3F"
+                    />
+                  </div>
+                </div>
+                <div className="text-white">
+                  <h3 className="text-xl leading-tight">{it.title}</h3>
+                  <p className="text-base opacity-90">{it.text}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

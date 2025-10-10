@@ -14,12 +14,20 @@ export default function Hero() {
       {/* content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 flex flex-col items-center text-center">
         {/* Heading */}
-        <h1 className="text-white font-semibold leading-tight tracking-tight w-5xl text-5xl md:text-7xl">
+        <h1
+          className="
+    text-white font-semibold tracking-tight
+    text-4xl sm:text-5xl md:text-7xl
+    leading-tight md:leading-[1.05]
+    max-w-3xl md:max-w-5xl mx-auto
+    [text-wrap:balance]
+  "
+        >
           Du entscheidest, wie alt dein Körper wirklich ist
         </h1>
 
         {/* Lead */}
-        <p className="mt-4 text-white/90 text-xl max-w-xl md:max-w-3xl">
+        <p className="mt-4 text-white/90 text-base sm:text-lg md:text-xl max-w-xl md:max-w-3xl mx-auto [text-wrap:balance]">
           Finde heraus, wie du jeden Tag an gesunder Lebenszeit gewinnst
         </p>
 
