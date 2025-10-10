@@ -177,7 +177,7 @@ export default function ResultsPreview({
           </span>
 
           <div className="flex flex-col my-5">
-            <div className="text-3xl font-semibold">29,99€</div>
+            <div className="text-3xl font-semibold">9,99€</div>
             <div className="text-base text-white/80">/Monat</div>
           </div>
 
