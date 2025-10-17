@@ -1,4 +1,4 @@
-// app/survey/page.tsx (updated)
+// app/survey/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -129,7 +129,8 @@ export default function SurveyPage() {
       fruits_veg: req<FruitsVeg>(form.fruits_veg),
       fish: req<Fish>(form.fish),
       diabetes_dx: req<YesNo>(form.diabetes_dx),
-      hba1c: form.diabetes_dx === "no" ? Number(form.hba1c) : undefined,
+      // FIX: only include hba1c when diabetes == "yes"
+      hba1c: form.diabetes_dx === "yes" ? Number(form.hba1c) : undefined,
       ldl: Number(form.ldl),
       hdl: Number(form.hdl),
       bp_treated: false,
@@ -144,48 +145,47 @@ export default function SurveyPage() {
   return (
     <section
       id="survey"
-      className="relative min-h-screen w-full flex items-start justify-center"
-      style={{ backgroundImage: "url('/background.jpg')" }}
+      className="relative min-h-screen w-full flex flex-col items-center justify-center py-16"
     >
-      {/* Background image + blur + 10% white overlay */}
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.jpg')" }}
       />
       <div className="absolute inset-0 bg-white/10 backdrop-blur-xl" />
 
-      {/* Content wrapper */}
-      <div className="relative z-10 w-full">
-        {/* Header (centered) */}
+      {/* Content wrapper (centered, column) */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col items-center">
+        {/* Header + Progress */}
         {!preview && (
-          <div className="mx-auto w-full max-w-5xl px-4 pt-28 pb-6 text-center">
+          <div className="flex flex-col w-full items-center text-center">
             <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
               Selbsttest
             </h1>
-            <p className="mt-4 text-xl text-font-primary/80">
-              Dein Selbsttest erlaubt Dir Deine persönlichen Handlungsfelder zu
-              identizieren, um Deine gesunde Lebenspanne (=Healthspan) zu
+            <p className="mt-4 text-xl text-font-primary/80 max-w-3xl">
+              Dein Selbsttest erlaubt Dir, Deine persönlichen Handlungsfelder zu
+              identifizieren, um Deine gesunde Lebensspanne (Healthspan) zu
               optimieren.
             </p>
 
-            {/* Progress */}
-            <div className="mt-8">
-              <div className="h-2 w-full rounded-full bg-black/10">
+            {/* Wider + thicker progress bar */}
+            <div className="mt-10 w-full max-w-4xl">
+              <div className="h-2 md:h-3 w-full rounded-full bg-black/10 overflow-hidden">
                 <div
-                  className="h-2 rounded-full bg-primary transition-all"
+                  className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="mt-2 text-base text-white">
+              <div className="mt-2 text-sm md:text-base text-font-primary/80 text-center">
                 Schritt {step + 1} von {STEPS.length}
               </div>
             </div>
           </div>
         )}
 
-        {/* Steps content (centered) */}
+        {/* Steps content */}
         {!preview && (
-          <div className="mx-auto w-full max-w-5xl px-4 pb-36 grid gap-5">
+          <div className="mt-10 w-full max-w-4xl mx-auto pb-36 grid gap-5">
             {STEPS[step].key === "profile" && (
               <ProfileStep form={form} set={set} />
             )}
@@ -212,7 +212,7 @@ export default function SurveyPage() {
           </div>
         )}
 
-        {/* Sticky nav (we'll restyle its component next) */}
+        {/* Sticky nav */}
         {!preview && (
           <StickyNav
             canBack={step > 0}

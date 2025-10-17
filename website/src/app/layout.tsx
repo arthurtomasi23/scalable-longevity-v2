@@ -1,11 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import "./globals.css";
-import HeaderNav from "../components/ui/HeaderNav";
-import Footer from "../components/ui/Footer";
-import CookieBanner from "../components/ui/CookieBanner";
+import CookieBanner from "@/components/ui/CookieBanner";
+import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Variable.woff2",
@@ -78,11 +78,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${satoshi.variable} antialiased`}>
-        <HeaderNav />
-        {children}
-        <Footer />
+        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
         <CookieBanner />
-
         <Analytics />
         <SpeedInsights />
       </body>

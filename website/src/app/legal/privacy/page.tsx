@@ -6,7 +6,7 @@ export default function DatenbestimmungenPage() {
     <main className="relative min-h-screen w-full bg-background">
       <section className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 pt-28 pb-24">
         <h1 className="text-4xl md:text-5xl font-medium mb-10">
-          Datenbestimmungen
+          Datenschutzbestimmungen
         </h1>
 
         <div className="prose prose-lg max-w-none text-font-primary gap-2">

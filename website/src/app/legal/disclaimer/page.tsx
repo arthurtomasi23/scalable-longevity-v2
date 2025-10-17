@@ -36,7 +36,7 @@ export default function HaftungsausschlussPage() {
           </p>
           <p>
             Bitte beachte zudem unsere{" "}
-            <a href="/datenbestimmungen" className="text-primary underline">
+            <a href="/privacy" className="text-primary underline">
               Datenschutzerklärung
             </a>{" "}
             sowie diesen Haftungsausschluss.

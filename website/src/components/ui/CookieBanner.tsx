@@ -29,7 +29,7 @@ export default function CookieBanner() {
           Wir verwenden Cookies, um unsere Website zu verbessern und dir ein
           besseres Erlebnis zu bieten. Mehr Infos in unserer{" "}
           <Link
-            href="/privacy"
+            href="/legal/privacy"
             className="underline text-primary hover:text-primary/80"
           >
             Datenschutzerklärung

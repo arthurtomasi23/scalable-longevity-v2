@@ -19,13 +19,8 @@ export default function StickyNav({
   onSubmit: () => void;
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-card">
+    <div className="fixed bottom-0 right-0">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-end md:justify-between px-4 py-3">
-        <div className="hidden md:block text-base text-font-secondary">
-          Musst du aufhören? Im nächsten Schritt kannst du ein Konto erstellen
-          und deinen Fortschritt speichern.
-        </div>
-
         <div className="flex items-center gap-2">
           <PillCTA
             as="button"

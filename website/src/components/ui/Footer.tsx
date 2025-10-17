@@ -24,8 +24,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="hover:underline">
+                <a href="/legal/privacy" className="hover:underline">
                   Datenschutz
+                </a>
+              </li>
+              <li>
+                <a href="/legal/disclaimer" className="hover:underline">
+                  Haftungsausschluss
+                </a>
+              </li>
+              <li>
+                <a href="/legal/impressum" className="hover:underline">
+                  Impressum
                 </a>
               </li>
             </ul>
