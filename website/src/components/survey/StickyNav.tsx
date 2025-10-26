@@ -28,7 +28,7 @@ export default function StickyNav({
             noIcon
             onClick={onBack}
             disabled={!canBack}
-            bgClass="bg-transparent border border-card-border hover:bg-white/60 hover:text-font-primary"
+            bgClass="bg-white/80  hover:bg-white cursor-pointer hover:text-font-primarydisabled:opacity-60"
             textClass="text-font-primary"
           />
 
@@ -39,7 +39,7 @@ export default function StickyNav({
               noIcon
               onClick={onNext}
               disabled={!canNext}
-              bgClass="bg-primary hover:bg-primary/80 disabled:opacity-60"
+              bgClass="bg-primary/80 hover:bg-primary disabled:opacity-60"
               textClass="text-white"
             />
           ) : (
@@ -49,7 +49,7 @@ export default function StickyNav({
               noIcon
               onClick={onSubmit}
               disabled={!canNext}
-              bgClass="bg-primary hover:bg-primary/80 disabled:opacity-60"
+              bgClass="bg-primary/80 hover:bg-primary disabled:opacity-60"
               textClass="text-white"
             />
           )}
