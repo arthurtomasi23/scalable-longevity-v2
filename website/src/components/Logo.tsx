@@ -13,7 +13,10 @@ export default function Logo() {
           width={30}
           height={30}
         />
-        SCALABLE
+        <p>
+          know
+          <span className="italic -m-0.5">age</span>
+        </p>
       </Link>
     </div>
   );
