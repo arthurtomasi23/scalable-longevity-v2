@@ -50,8 +50,6 @@ export type ScoreResult = {
   bmi?: number;
 };
 
-const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
-
 const bmiOf = (h_cm: number, w_kg: number) => +(w_kg / Math.pow(h_cm / 100, 2)).toFixed(1);
 
 // ---- Mappers: convert raw inputs -> Excel bands, then to deltas ----
