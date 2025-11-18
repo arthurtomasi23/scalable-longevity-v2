@@ -6,6 +6,7 @@ import { PillCTA } from "@/components/ui/PillCTA";
 import HoverCard from "@/components/survey/HoverCard";
 import { Info, Check } from "lucide-react";
 import type { ScoreResult } from "@/lib/surveyTypes";
+import { useRouter } from "next/navigation";
 
 export default function ResultsPreview({
   preview,
@@ -17,6 +18,7 @@ export default function ResultsPreview({
   const bioAge = chronoAge + preview.totalDelta;
   const delta = preview.totalDelta; // + = älter, - = jünger
   const absDelta = Math.abs(delta);
+  const router = useRouter();
 
   // ---- Gauge (halbkreis) ----
   // map delta in [-20,+20] Jahren auf [0..1] (rechts..links)
@@ -45,7 +47,7 @@ export default function ResultsPreview({
     .slice(0, 3);
 
   return (
-    <div className="mx-auto w-full max-h-screen max-w-6xl flex items-center justify-center">
+    <div className="mx-auto w-full max-h-screen flex-col max-w-6xl flex items-center justify-center">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 pt-10">
         {/* LEFT: Ergebnisse */}
         <Card>
@@ -220,6 +222,12 @@ export default function ResultsPreview({
           </div>
         </div>
       </div>
+      <button
+        className="mt-10 p-5 cursor-pointer hover:text-primary text-white underline font-semibold"
+        onClick={() => router.push("/")}
+      >
+        Zurück zur Startseite
+      </button>
     </div>
   );
 }
