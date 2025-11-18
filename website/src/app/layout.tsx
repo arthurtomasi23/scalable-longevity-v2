@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     creator: "@deinTwitterHandle",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-32x32.png",
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
     apple: "/apple-touch-icon.png",
   },
 };
@@ -72,7 +72,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "knowage",
               url: "https://scalable-longevity.com",
-              logo: "https://scalable-longevity.com/logo.png",
+              logo: "https://scalable-longevity.com/logo.svg",
             }),
           }}
         />

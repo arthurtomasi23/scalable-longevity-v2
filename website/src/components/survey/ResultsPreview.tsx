@@ -45,7 +45,7 @@ export default function ResultsPreview({
     .slice(0, 3);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 pb-10 flex items-center justify-center">
+    <div className="mx-auto w-full max-h-screen max-w-6xl flex items-center justify-center">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 pt-10">
         {/* LEFT: Ergebnisse */}
         <Card>

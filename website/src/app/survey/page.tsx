@@ -27,6 +27,7 @@ import LifestyleStep from "@/components/survey/steps/LifestyleStep";
 import MetabolicStep from "@/components/survey/steps/MetabolicStep";
 import ResultsPreview from "@/components/survey/ResultsPreview";
 import StickyNav from "@/components/survey/StickyNav";
+import DataSharingStep from "@/components/survey/steps/DataSharingStep";
 
 // Helper to assert required (strip "" at submit time)
 const req = <T,>(v: T | ""): T => v as T;
@@ -81,6 +82,7 @@ export default function SurveyPage() {
     hba1c: "",
     ldl: "",
     hdl: "",
+    share_data: null,
   });
 
   useEffect(() => {
@@ -110,7 +112,10 @@ export default function SurveyPage() {
     setStep((s) => Math.max(s - 1, 0));
   }
 
-  function submit() {
+  async function submit() {
+    console.log("📤 SUBMIT STARTED");
+    console.log("➡️ Current Form State:", JSON.parse(JSON.stringify(form)));
+
     const payload: ScoreInput = {
       age: Number(form.age),
       gender: req<Gender>(form.gender),
@@ -129,17 +134,79 @@ export default function SurveyPage() {
       fruits_veg: req<FruitsVeg>(form.fruits_veg),
       fish: req<Fish>(form.fish),
       diabetes_dx: req<YesNo>(form.diabetes_dx),
-      // FIX: only include hba1c when diabetes == "yes"
-      hba1c: form.diabetes_dx === "yes" ? Number(form.hba1c) : undefined,
+      hba1c:
+        form.diabetes_dx === "yes" && form.hba1c !== ""
+          ? Number(form.hba1c)
+          : undefined,
       ldl: Number(form.ldl),
       hdl: Number(form.hdl),
-      bp_treated: false,
-      ldl_treated: false,
     };
+
+    console.log("📦 Score Payload:", payload);
 
     const result = scoreSurvey(payload);
     setPreview(result);
-    track("survey_submit", { totalDelta: result.totalDelta });
+    console.log("📊 Score Output:", result);
+
+    // 👉 derive bio age + pace here
+    const chronoAgeNum = Number(form.age);
+    const biologicalAge = chronoAgeNum + result.totalDelta; // z.B. 42 + (-3) = 39
+    const paceOfAging = result.totalDelta; // z.B. -3 = 3 Jahre „jünger“
+
+    console.log("🧬 Derived:", {
+      chronoAge: chronoAgeNum,
+      biologicalAge,
+      paceOfAging,
+    });
+
+    if (form.share_data) {
+      console.log("🔐 share_data = true → sending to /api/survey");
+
+      // 🔧 Normalize fields for the DB (no "" into enums / numbers)
+      const fixedPayload = {
+        ...payload,
+
+        family_mi_stroke_onset:
+          form.family_mi_stroke === "yes" && form.family_mi_stroke_onset !== ""
+            ? form.family_mi_stroke_onset
+            : null,
+
+        hba1c:
+          form.diabetes_dx === "yes" && form.hba1c !== ""
+            ? Number(form.hba1c)
+            : null,
+
+        share_data: form.share_data ?? true,
+
+        // 🆕 add derived values for storage
+        biological_age: biologicalAge,
+        pace_of_aging: paceOfAging,
+      };
+
+      console.log("📦 Final DB Payload:", fixedPayload);
+
+      try {
+        const res = await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(fixedPayload),
+        });
+
+        const json = await res.json();
+
+        console.log("📬 Server Response:", json);
+
+        if (!res.ok) {
+          console.error("❌ Insert failed:", json);
+        } else {
+          console.log("✅ Insert successful!");
+        }
+      } catch (err) {
+        console.error("🔥 ERROR sending survey to backend:", err);
+      }
+    } else {
+      console.log("🚫 share_data = false → not sending anything to backend");
+    }
   }
 
   return (
@@ -186,6 +253,9 @@ export default function SurveyPage() {
         {/* Steps content */}
         {!preview && (
           <div className="mt-10 w-full max-w-4xl mx-auto pb-36 grid gap-5">
+            {STEPS[step].key === "dataSharing" && (
+              <DataSharingStep form={form} set={set} />
+            )}
             {STEPS[step].key === "profile" && (
               <ProfileStep form={form} set={set} />
             )}

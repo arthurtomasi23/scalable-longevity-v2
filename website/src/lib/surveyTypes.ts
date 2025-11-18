@@ -36,6 +36,7 @@ export type FormState = {
 
   ldl: number | "";
   hdl: number | "";
+  share_data: boolean | null;
 };
 
 export type ScoreRule = { rule: string; label: string; delta: number };

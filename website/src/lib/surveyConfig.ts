@@ -13,6 +13,7 @@ export const LIMITS = {
 } as const;
 
 export const STEPS: { key: string; title: string; fields: (keyof FormState)[] }[] = [
+  { key: "dataSharing", title: "Data Sharing",        fields: ["share_data"] },
   { key: "profile",   title: "Your Profile",         fields: ["age", "gender"] },
   { key: "body",      title: "Body Metrics",         fields: ["height_cm", "weight_kg", "waist_cm"] },
   { key: "activity",  title: "Activity",             fields: ["daily_movement", "sport"] },
