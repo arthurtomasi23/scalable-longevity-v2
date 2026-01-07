@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Card from "@/components/survey/Card";
+import Image from "next/image";
 import type { FormState } from "@/lib/surveyTypes";
 
 export default function DataSharingStep({
@@ -14,81 +14,75 @@ export default function DataSharingStep({
 }) {
   const choice = form.share_data;
 
-  // Make "Yes" the real default on first load
   useEffect(() => {
-    if (choice === null) {
-      set("share_data", true);
-    }
+    if (choice === null) set("share_data", true);
   }, [choice, set]);
 
+  const share = choice ?? true;
+
   return (
-    <Card>
-      <div className="flex flex-col items-center text-center space-y-4 px-6">
-        <h2 className="text-2xl font-semibold">
-          Hilf uns, den LifePathAnalyzer noch besser zu machen
-        </h2>
+    <div className="w-full h-full flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-10">
+        {/* LEFT */}
+        <div className="flex-1 h-[460px] rounded-[30px] border border-card-border bg-card p-8 flex flex-col justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold mb-4">
+              Hilf uns den Lifepath Analyzer noch besser zu machen...
+            </h1>
+            <p className="text-sm text-font-secondary">
+              Der Selbsttest ist mit beiden Auswahlen möglich
+            </p>
+          </div>
 
-        <p className="max-w-xl text-font-secondary">
-          Deine Antworten können - vollständig anonym - dazu beitragen, unseren
-          Algorithmus zu verbessern. So werden zukünftige Empfehlungen noch
-          genauer und hilfreicher.
-        </p>
+          <div>
+            <div className="bg-background p-1 rounded-full flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => set("share_data", false)}
+                className={[
+                  "w-full rounded-full py-3 text-sm transition",
+                  !share ? "bg-primary text-white" : "bg-transparent",
+                ].join(" ")}
+              >
+                Nicht Teilen
+              </button>
 
-        <ul className="space-y-1 text-sm">
-          <li>
-            • <strong>Besser für dich:</strong> Wir erkennen Muster in den Daten
-            und können dein Risiko besser einschätzen.
-          </li>
-          <li>
-            • <strong>Besser für andere:</strong> Deine Antworten helfen auch
-            zukünftigen Nutzer:innen, ihre „Healthspan“ zu verlängern.
-          </li>
-          <li>
-            • <strong>Datenschutz first:</strong> Keine E-Mail, kein Name, keine
-            Identifikation - nur anonyme Antwortmuster.
-          </li>
-        </ul>
-      </div>
+              <button
+                type="button"
+                onClick={() => set("share_data", true)}
+                className={[
+                  "w-full rounded-full py-3 text-sm transition",
+                  share ? "bg-primary text-white" : "bg-transparent",
+                ].join(" ")}
+              >
+                Teilen
+              </button>
+            </div>
 
-      {/* Selection Cards */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 max-w-lg mx-auto">
-        {/* YES CARD */}
-        <div
-          onClick={() => set("share_data", true)}
-          className={[
-            "cursor-pointer rounded-xl px-6 py-5 text-center shadow-sm transition border",
-            choice === true
-              ? "bg-primary text-white border-primary shadow-md scale-[1.02]"
-              : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20",
-          ].join(" ")}
-        >
-          <p className="text-base font-semibold">Ja, anonym teilen</p>
-          <p className="text-xs opacity-80 mt-1">
-            Empfohlen - hilft uns, bessere Analysen zu erstellen.
-          </p>
+            <p className="mt-4 text-xs text-font-secondary text-center">
+              Deine Antworten helfen zukünftige Empfehlungen noch genauer und
+              hilfreicher zu machen
+            </p>
+          </div>
         </div>
 
-        {/* NO CARD */}
-        <div
-          onClick={() => set("share_data", false)}
-          className={[
-            "cursor-pointer rounded-xl px-6 py-5 text-center shadow-sm transition border",
-            choice === false
-              ? "bg-primary text-white border-primary shadow-md scale-[1.02]"
-              : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20",
-          ].join(" ")}
-        >
-          <p className="text-base font-semibold">Nein, nicht teilen</p>
-          <p className="text-xs opacity-80 mt-1">
-            Du kannst trotzdem den gesamten Selbsttest machen.
-          </p>
+        {/* RIGHT */}
+        <div className="flex-1 h-[460px] relative overflow-hidden rounded-[30px]">
+          <Image
+            src="/data-sharing.jpg"
+            alt="Data Sharing Illustration"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
       </div>
-
-      <p className="mt-6 text-[11px] text-font-secondary text-center max-w-md mx-auto">
-        Deine Auswahl gilt erst, wenn du „Weiter“ klickst. Beide Optionen
-        ermöglichen die volle Nutzung des Selbsttests.
-      </p>
-    </Card>
+      <div className="flex mt-5 justify-end">
+        <button className="py-3 px-6 bg-primary text-white rounded-full">
+          Test Starten
+        </button>
+      </div>
+    </div>
   );
 }

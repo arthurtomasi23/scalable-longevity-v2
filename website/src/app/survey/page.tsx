@@ -26,7 +26,6 @@ import CardioStep from "@/components/survey/steps/CardioStep";
 import LifestyleStep from "@/components/survey/steps/LifestyleStep";
 import MetabolicStep from "@/components/survey/steps/MetabolicStep";
 import ResultsPreview from "@/components/survey/ResultsPreview";
-import StickyNav from "@/components/survey/StickyNav";
 import DataSharingStep from "@/components/survey/steps/DataSharingStep";
 
 // Helper to assert required (strip "" at submit time)
@@ -212,30 +211,20 @@ export default function SurveyPage() {
   return (
     <section
       id="survey"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center py-16"
+      className="h-[100vh] w-full flex flex-col items-center"
     >
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/background.jpg')" }}
-      />
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-xl" />
+      {/* Header + Progress */}
+      {!preview && (
+        <div className="flex flex-col w-full items-center text-center">
+          <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
+            Selbsttest
+          </h1>
+          <p className="mt-4 text-xl text-font-primary/80 max-w-3xl">
+            Finde heraus was wirklich hilft deine Healthspan zu optimieren
+          </p>
 
-      {/* Content wrapper (centered, column) */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col items-center">
-        {/* Header + Progress */}
-        {!preview && (
-          <div className="flex flex-col w-full items-center text-center">
-            <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
-              Selbsttest
-            </h1>
-            <p className="mt-4 text-xl text-font-primary/80 max-w-3xl">
-              Dein Selbsttest erlaubt Dir, Deine persönlichen Handlungsfelder zu
-              identifizieren, um Deine gesunde Lebensspanne (Healthspan) zu
-              optimieren.
-            </p>
-
-            {/* Wider + thicker progress bar */}
+          {/* progress bar */}
+          {!DataSharingStep && (
             <div className="mt-10 w-full max-w-4xl">
               <div className="h-2 md:h-3 w-full rounded-full bg-black/10 overflow-hidden">
                 <div
@@ -247,53 +236,39 @@ export default function SurveyPage() {
                 Schritt {step + 1} von {STEPS.length}
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+      )}
 
-        {/* Steps content */}
-        {!preview && (
-          <div className="mt-10 w-full max-w-4xl mx-auto pb-36 grid gap-5">
-            {STEPS[step].key === "dataSharing" && (
-              <DataSharingStep form={form} set={set} />
-            )}
-            {STEPS[step].key === "profile" && (
-              <ProfileStep form={form} set={set} />
-            )}
-            {STEPS[step].key === "body" && <BodyStep form={form} set={set} />}
-            {STEPS[step].key === "activity" && (
-              <ActivityStep form={form} set={set} />
-            )}
-            {STEPS[step].key === "cardio" && (
-              <CardioStep form={form} set={set} />
-            )}
-            {STEPS[step].key === "lifestyle" && (
-              <LifestyleStep form={form} set={set} />
-            )}
-            {STEPS[step].key === "metabolic" && (
-              <MetabolicStep form={form} set={set} />
-            )}
-          </div>
-        )}
+      {/* Steps content */}
+      {!preview && (
+        <div className="flex-1 w-full max-w-4xl mx-auto pb-10">
+          {STEPS[step].key === "dataSharing" && (
+            <DataSharingStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "profile" && (
+            <ProfileStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "body" && <BodyStep form={form} set={set} />}
+          {STEPS[step].key === "activity" && (
+            <ActivityStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "cardio" && <CardioStep form={form} set={set} />}
+          {STEPS[step].key === "lifestyle" && (
+            <LifestyleStep form={form} set={set} />
+          )}
+          {STEPS[step].key === "metabolic" && (
+            <MetabolicStep form={form} set={set} />
+          )}
+        </div>
+      )}
 
-        {/* Preview */}
-        {preview && (
-          <div className="relative z-10 flex w-full h-full justify-center items-center px-4 py-28">
-            <ResultsPreview preview={preview} chronoAge={Number(form.age)} />
-          </div>
-        )}
-
-        {/* Sticky nav */}
-        {!preview && (
-          <StickyNav
-            canBack={step > 0}
-            canNext={canContinue()}
-            atEnd={step === STEPS.length - 1}
-            onBack={back}
-            onNext={next}
-            onSubmit={submit}
-          />
-        )}
-      </div>
+      {/* Preview */}
+      {preview && (
+        <div className="relative z-10 flex w-full h-full justify-center items-center px-4 py-28">
+          <ResultsPreview preview={preview} chronoAge={Number(form.age)} />
+        </div>
+      )}
     </section>
   );
 }
