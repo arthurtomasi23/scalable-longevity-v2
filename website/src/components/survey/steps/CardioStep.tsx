@@ -1,9 +1,8 @@
-// components/survey/steps/CardioStep.tsx
 "use client";
-import Card from "@/components/survey/Card";
+
+import Image from "next/image";
 import Segment from "@/components/survey/Segment";
 import NumberInput from "@/components/survey/NumberInput";
-import { Label, Help } from "@/components/survey/Label";
 import { LIMITS } from "@/lib/surveyConfig";
 import type { FormState, YesNo, AgeOfOnset } from "@/lib/surveyTypes";
 
@@ -15,75 +14,99 @@ export default function CardioStep({
   set: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }) {
   return (
-    <Card>
-      <Label>Herz-Kreislauf &amp; Familienanamnese</Label>
+    <div className="w-full h-full flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-5">
+        {/* LEFT */}
+        <div className="flex-1 h-[460px] rounded-[30px] border border-card-border bg-card p-8 flex flex-col justify-between">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-xl font-medium text-font-primary mb-4">
+              Herz-Kreislauf
+            </h2>
 
-      <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div>
-          <Label>Eigene Vorgeschichte: Herzinfarkt/Schlaganfall</Label>
-          <div className="mt-2">
-            <Segment<YesNo>
-              value={form.mi_stroke_personal}
-              onChange={(v) => set("mi_stroke_personal", v)}
-              options={[
-                { label: "Nein", value: "no" },
-                { label: "Ja", value: "yes" },
-              ]}
-            />
-          </div>
-        </div>
-
-        <div>
-          <Label>Familienanamnese: Herzinfarkt/Schlaganfall</Label>
-          <Help>Elternteil oder Geschwister.</Help>
-          <div className="mt-2">
-            <Segment<YesNo>
-              value={form.family_mi_stroke}
-              onChange={(v) => set("family_mi_stroke", v)}
-              options={[
-                { label: "Nein", value: "no" },
-                { label: "Ja", value: "yes" },
-              ]}
-            />
-          </div>
-        </div>
-
-        {form.family_mi_stroke === "yes" && (
-          <div>
-            <Label>Erkrankungsalter (jüngstes)</Label>
-            <div className="mt-2">
-              <Segment<AgeOfOnset>
-                value={form.family_mi_stroke_onset}
-                onChange={(v) => set("family_mi_stroke_onset", v)}
+            {/* Personal history */}
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-font-secondary">
+                Eigene Vorgeschichte: Herzinfarkt / Schlaganfall
+              </p>
+              <Segment<YesNo>
+                value={form.mi_stroke_personal}
+                onChange={(v) => set("mi_stroke_personal", v)}
                 options={[
-                  { label: "<55", value: "<55" },
-                  { label: "55-64", value: "55-64" },
-                  { label: "≥65", value: ">=65" },
-                  { label: "Unbekannt", value: "unknown" },
+                  { label: "Nein", value: "no" },
+                  { label: "Ja", value: "yes" },
                 ]}
               />
             </div>
-          </div>
-        )}
 
-        <div>
-          <Label>Systolischer Blutdruck</Label>
-          <Help>
-            Oberer Wert der Blutdruckmessung (Druck beim Herzschlag). Zuhause
-            mit Messgerät oder in der Praxis messbar.
-          </Help>
-          <div className="mt-2">
-            <NumberInput
-              value={form.systolic_bp}
-              onChange={(v) => set("systolic_bp", v)}
-              placeholder="z. B. 120"
-              min={LIMITS.systolic_bp.min}
-              max={LIMITS.systolic_bp.max}
-              unit="mmHg"
-            />
+            {/* Family history */}
+            <div className="flex flex-col gap-2 mt-2">
+              <p className="text-sm text-font-secondary">
+                Familienanamnese: Herzinfarkt / Schlaganfall
+              </p>
+              <Segment<YesNo>
+                value={form.family_mi_stroke}
+                onChange={(v) => set("family_mi_stroke", v)}
+                options={[
+                  { label: "Nein", value: "no" },
+                  { label: "Ja", value: "yes" },
+                ]}
+              />
+            </div>
+
+            {/* Age of onset (conditional) */}
+            {form.family_mi_stroke === "yes" && (
+              <div className="flex flex-col gap-2 mt-2">
+                <p className="text-sm text-font-secondary">
+                  Erkrankungsalter (jüngstes Familienmitglied)
+                </p>
+                <Segment<AgeOfOnset>
+                  value={form.family_mi_stroke_onset}
+                  onChange={(v) => set("family_mi_stroke_onset", v)}
+                  options={[
+                    { label: "<55", value: "<55" },
+                    { label: "55–64", value: "55-64" },
+                    { label: "≥65", value: ">=65" },
+                    { label: "Unbekannt", value: "unknown" },
+                  ]}
+                />
+              </div>
+            )}
+
+            {/* Blood pressure */}
+            <div className="flex flex-col gap-2 mt-2">
+              <p className="text-sm text-font-secondary">
+                Systolischer Blutdruck
+              </p>
+              <NumberInput
+                value={form.systolic_bp}
+                onChange={(v) => set("systolic_bp", v)}
+                placeholder="z. B. 120"
+                min={LIMITS.systolic_bp.min}
+                max={LIMITS.systolic_bp.max}
+                unit="mmHg"
+              />
+            </div>
           </div>
+
+          {/* Bottom helper line (keeps vertical rhythm consistent) */}
+          <p className="text-xs text-font-secondary mt-4">
+            Blutdruck und familiäre Risiken sind zentrale Treiber der
+            Herzgesundheit.
+          </p>
+        </div>
+
+        {/* RIGHT */}
+        <div className="flex-1 h-[460px] relative overflow-hidden rounded-[30px]">
+          <Image
+            src="/data-sharing.jpg"
+            alt="Survey Illustration"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
       </div>
-    </Card>
+    </div>
   );
 }

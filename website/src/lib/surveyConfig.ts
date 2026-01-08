@@ -14,8 +14,11 @@ export const LIMITS = {
 
 export const STEPS: { key: string; title: string; fields: (keyof FormState)[] }[] = [
   { key: "dataSharing", title: "Data Sharing",        fields: ["share_data"] },
-  { key: "profile",   title: "Your Profile",         fields: ["age", "gender"] },
-  { key: "body",      title: "Body Metrics",         fields: ["height_cm", "weight_kg", "waist_cm"] },
+  {
+    key: "profile",
+    title: "Your Profile",
+    fields: ["age", "gender", "height_cm", "weight_kg", "waist_cm"],
+  },
   { key: "activity",  title: "Activity",             fields: ["daily_movement", "sport"] },
   { key: "cardio",    title: "Cardio & Family",      fields: ["mi_stroke_personal","family_mi_stroke","family_mi_stroke_onset","systolic_bp"] },
   { key: "lifestyle", title: "Lifestyle",            fields: ["stress","smoking","fastfood","fruits_veg","fish"] },

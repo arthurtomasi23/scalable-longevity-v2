@@ -8,9 +8,11 @@ import type { FormState } from "@/lib/surveyTypes";
 export default function DataSharingStep({
   form,
   set,
+  onStart,
 }: {
   form: FormState;
   set: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
+  onStart: () => void;
 }) {
   const choice = form.share_data;
 
@@ -22,7 +24,7 @@ export default function DataSharingStep({
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center px-4">
-      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-10">
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-5">
         {/* LEFT */}
         <div className="flex-1 h-[460px] rounded-[30px] border border-card-border bg-card p-8 flex flex-col justify-between">
           <div>
@@ -40,7 +42,7 @@ export default function DataSharingStep({
                 type="button"
                 onClick={() => set("share_data", false)}
                 className={[
-                  "w-full rounded-full py-3 text-sm transition",
+                  "cursor-pointer w-full rounded-full py-3 text-sm transition",
                   !share ? "bg-primary text-white" : "bg-transparent",
                 ].join(" ")}
               >
@@ -51,7 +53,7 @@ export default function DataSharingStep({
                 type="button"
                 onClick={() => set("share_data", true)}
                 className={[
-                  "w-full rounded-full py-3 text-sm transition",
+                  "cursor-pointer w-full rounded-full py-3 text-sm transition",
                   share ? "bg-primary text-white" : "bg-transparent",
                 ].join(" ")}
               >
@@ -79,7 +81,11 @@ export default function DataSharingStep({
         </div>
       </div>
       <div className="flex mt-5 justify-end">
-        <button className="py-3 px-6 bg-primary text-white rounded-full">
+        <button
+          type="button"
+          onClick={onStart}
+          className="py-3 px-6 bg-primary text-white rounded-full cursor-pointer"
+        >
           Test Starten
         </button>
       </div>

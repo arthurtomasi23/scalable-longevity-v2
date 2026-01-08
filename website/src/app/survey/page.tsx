@@ -1,7 +1,8 @@
 // app/survey/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { scoreSurvey } from "@/lib/score";
 import { STEPS, visibleFieldsForStep } from "@/lib/surveyConfig";
@@ -19,8 +20,7 @@ import type {
   AgeOfOnset,
 } from "@/lib/surveyTypes";
 
-import ProfileStep from "@/components/survey/steps/ProfileStep";
-import BodyStep from "@/components/survey/steps/BodyStep";
+import ProfileBodyStep from "@/components/survey/steps/ProfileBodyStep";
 import ActivityStep from "@/components/survey/steps/ActivityStep";
 import CardioStep from "@/components/survey/steps/CardioStep";
 import LifestyleStep from "@/components/survey/steps/LifestyleStep";
@@ -59,6 +59,7 @@ type ScoreInput = {
 export default function SurveyPage() {
   const [step, setStep] = useState(0);
   const [preview, setPreview] = useState<ScoreResult | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState<FormState>({
     age: "",
@@ -88,7 +89,14 @@ export default function SurveyPage() {
     track("survey_view_start");
   }, []);
 
-  const progress = ((step + 1) / STEPS.length) * 100;
+  const stepKey = STEPS[step]?.key;
+  const isIntro = stepKey === "dataSharing";
+  const isLastStep = step === STEPS.length - 1;
+
+  const progress = useMemo(() => {
+    // progress like screenshot, but hide on intro step anyway
+    return Math.round(((step + 1) / STEPS.length) * 100);
+  }, [step]);
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -106,14 +114,14 @@ export default function SurveyPage() {
     track("survey_next", { step: STEPS[step].key });
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
   }
+
   function back() {
     track("survey_prev", { step: STEPS[step].key });
     setStep((s) => Math.max(s - 1, 0));
   }
 
   async function submit() {
-    console.log("📤 SUBMIT STARTED");
-    console.log("➡️ Current Form State:", JSON.parse(JSON.stringify(form)));
+    if (isSubmitting) return;
 
     const payload: ScoreInput = {
       age: Number(form.age),
@@ -141,27 +149,19 @@ export default function SurveyPage() {
       hdl: Number(form.hdl),
     };
 
-    console.log("📦 Score Payload:", payload);
-
     const result = scoreSurvey(payload);
     setPreview(result);
-    console.log("📊 Score Output:", result);
 
-    // 👉 derive bio age + pace here
+    // derived values for optional storage
     const chronoAgeNum = Number(form.age);
-    const biologicalAge = chronoAgeNum + result.totalDelta; // z.B. 42 + (-3) = 39
-    const paceOfAging = result.totalDelta; // z.B. -3 = 3 Jahre „jünger“
+    const biologicalAge = chronoAgeNum + result.totalDelta;
+    const paceOfAging = result.totalDelta;
 
-    console.log("🧬 Derived:", {
-      chronoAge: chronoAgeNum,
-      biologicalAge,
-      paceOfAging,
-    });
+    // only send if user agreed
+    if (!form.share_data) return;
 
-    if (form.share_data) {
-      console.log("🔐 share_data = true → sending to /api/survey");
-
-      // 🔧 Normalize fields for the DB (no "" into enums / numbers)
+    setIsSubmitting(true);
+    try {
       const fixedPayload = {
         ...payload,
 
@@ -176,46 +176,70 @@ export default function SurveyPage() {
             : null,
 
         share_data: form.share_data ?? true,
-
-        // 🆕 add derived values for storage
         biological_age: biologicalAge,
         pace_of_aging: paceOfAging,
       };
 
-      console.log("📦 Final DB Payload:", fixedPayload);
+      const res = await fetch("/api/survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fixedPayload),
+      });
 
-      try {
-        const res = await fetch("/api/survey", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(fixedPayload),
-        });
-
-        const json = await res.json();
-
-        console.log("📬 Server Response:", json);
-
-        if (!res.ok) {
-          console.error("❌ Insert failed:", json);
-        } else {
-          console.log("✅ Insert successful!");
-        }
-      } catch (err) {
-        console.error("🔥 ERROR sending survey to backend:", err);
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        console.error("Survey insert failed:", json);
       }
-    } else {
-      console.log("🚫 share_data = false → not sending anything to backend");
+    } catch (err) {
+      console.error("Error sending survey to backend:", err);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
+  function handleNext() {
+    if (isIntro) return; // intro uses its own start button
+    if (!canContinue()) return;
+
+    if (isLastStep) {
+      void submit();
+    } else {
+      next();
+    }
+  }
+
+  const StepComponent = useMemo(() => {
+    switch (stepKey) {
+      case "dataSharing":
+        return <DataSharingStep form={form} set={set} onStart={next} />;
+      case "profile":
+        return <ProfileBodyStep form={form} set={set} />;
+      case "activity":
+        return <ActivityStep form={form} set={set} />;
+      case "cardio":
+        return <CardioStep form={form} set={set} />;
+      case "lifestyle":
+        return <LifestyleStep form={form} set={set} />;
+      case "metabolic":
+        return <MetabolicStep form={form} set={set} />;
+      default:
+        return null;
+    }
+  }, [stepKey, form]); // set & next are stable enough here
+
   return (
-    <section
-      id="survey"
-      className="h-[100vh] w-full flex flex-col items-center"
-    >
+    <section id="survey" className="h-screen w-full flex flex-col items-center">
+      {/* Back to homepage */}
+      <Link
+        href="/"
+        className="cursor-pointer text-primary underline absolute top-8 left-8"
+      >
+        zurück zu Startseite
+      </Link>
+
       {/* Header + Progress */}
       {!preview && (
-        <div className="flex flex-col w-full items-center text-center">
+        <div className="flex flex-col w-full items-center text-center mt-14">
           <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
             Selbsttest
           </h1>
@@ -223,17 +247,37 @@ export default function SurveyPage() {
             Finde heraus was wirklich hilft deine Healthspan zu optimieren
           </p>
 
-          {/* progress bar */}
-          {!DataSharingStep && (
-            <div className="mt-10 w-full max-w-4xl">
-              <div className="h-2 md:h-3 w-full rounded-full bg-black/10 overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <div className="mt-2 text-sm md:text-base text-font-primary/80 text-center">
-                Schritt {step + 1} von {STEPS.length}
+          {/* Progress (hide on intro) */}
+          {!isIntro && (
+            <div className="mt-10 mb-5 w-full max-w-4xl">
+              <div className="flex items-center gap-4">
+                <span className="text-font-primary/80 text-base w-10 text-left">
+                  0%
+                </span>
+
+                <div className="relative flex-1">
+                  <div className="h-3 w-full rounded-full bg-black/20 overflow-hidden" />
+                  <div
+                    className="absolute left-0 top-0 h-3 rounded-full bg-primary"
+                    style={{ width: `${progress}%` }}
+                  />
+                  {/* pill */}
+                  <div
+                    className="absolute -top-10"
+                    style={{
+                      left: `${progress}%`,
+                      transform: "translateX(-50%)",
+                    }}
+                  >
+                    <div className="px-4 py-2 rounded-full bg-primary text-white text-sm font-medium shadow-sm">
+                      {progress}%
+                    </div>
+                  </div>
+                </div>
+
+                <span className="text-font-primary/80 text-base w-14 text-right">
+                  100%
+                </span>
               </div>
             </div>
           )}
@@ -242,30 +286,47 @@ export default function SurveyPage() {
 
       {/* Steps content */}
       {!preview && (
-        <div className="flex-1 w-full max-w-4xl mx-auto pb-10">
-          {STEPS[step].key === "dataSharing" && (
-            <DataSharingStep form={form} set={set} />
-          )}
-          {STEPS[step].key === "profile" && (
-            <ProfileStep form={form} set={set} />
-          )}
-          {STEPS[step].key === "body" && <BodyStep form={form} set={set} />}
-          {STEPS[step].key === "activity" && (
-            <ActivityStep form={form} set={set} />
-          )}
-          {STEPS[step].key === "cardio" && <CardioStep form={form} set={set} />}
-          {STEPS[step].key === "lifestyle" && (
-            <LifestyleStep form={form} set={set} />
-          )}
-          {STEPS[step].key === "metabolic" && (
-            <MetabolicStep form={form} set={set} />
+        <div className="flex-1 w-full max-w-4xl mx-auto flex flex-col justify-center pb-10">
+          {StepComponent}
+
+          {/* Bottom navigation (hide on intro) */}
+          {!isIntro && (
+            <div className="mt-6 flex items-center justify-between px-4">
+              <button
+                type="button"
+                onClick={back}
+                disabled={step === 0}
+                className={[
+                  "py-3 px-8 rounded-full transition",
+                  step === 0
+                    ? "bg-black/20 text-white cursor-not-allowed"
+                    : "bg-black/20 text-white hover:bg-black/30 cursor-pointer",
+                ].join(" ")}
+              >
+                Zurück
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={!canContinue() || isSubmitting}
+                className={[
+                  "py-3 px-8 rounded-full transition",
+                  !canContinue() || isSubmitting
+                    ? "bg-primary/50 text-white cursor-not-allowed"
+                    : "bg-primary text-white hover:opacity-95 cursor-pointer",
+                ].join(" ")}
+              >
+                {isLastStep ? (isSubmitting ? "…" : "Fertig") : "Weiter"}
+              </button>
+            </div>
           )}
         </div>
       )}
 
       {/* Preview */}
       {preview && (
-        <div className="relative z-10 flex w-full h-full justify-center items-center px-4 py-28">
+        <div className="flex-1 w-full flex justify-center items-center px-4 py-10">
           <ResultsPreview preview={preview} chronoAge={Number(form.age)} />
         </div>
       )}
