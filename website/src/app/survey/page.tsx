@@ -6,7 +6,7 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { scoreSurvey } from "@/lib/score";
 import { STEPS, visibleFieldsForStep } from "@/lib/surveyConfig";
-import { Home } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import type {
   FormState,
@@ -272,7 +272,7 @@ export default function SurveyPage() {
       >
         {/* Mobile: icon */}
         <span className="md:hidden">
-          <Home className="h-6 w-6" />
+          <ArrowLeft className="h-6 w-6" />
         </span>
 
         {/* Desktop: text */}
