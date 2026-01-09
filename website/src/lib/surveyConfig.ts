@@ -12,24 +12,61 @@ export const LIMITS = {
   hdl: { min: 10, max: 120 },
 } as const;
 
+export const DEFAULTS = {
+  hba1c: 5.6,
+  ldl: 110,
+  hdl: 50,
+} as const;
+
+
+
 export const STEPS: { key: string; title: string; fields: (keyof FormState)[] }[] = [
-  { key: "dataSharing", title: "Data Sharing",        fields: ["share_data"] },
+  { key: "dataSharing", title: "Data Sharing", fields: ["share_data"] },
+
+  { key: "profile", title: "Your Profile", fields: ["age", "gender", "height_cm", "weight_kg", "waist_cm"] },
+
+  { key: "activity", title: "Activity", fields: ["daily_movement", "sport"] },
+
   {
-    key: "profile",
-    title: "Your Profile",
-    fields: ["age", "gender", "height_cm", "weight_kg", "waist_cm"],
+    key: "cardio",
+    title: "Cardio & Family",
+    fields: ["mi_stroke_personal", "family_mi_stroke", "family_mi_stroke_onset", "systolic_bp"],
   },
-  { key: "activity",  title: "Activity",             fields: ["daily_movement", "sport"] },
-  { key: "cardio",    title: "Cardio & Family",      fields: ["mi_stroke_personal","family_mi_stroke","family_mi_stroke_onset","systolic_bp"] },
-  { key: "lifestyle", title: "Lifestyle",            fields: ["stress","smoking","fastfood","fruits_veg","fish"] },
-  { key: "metabolic", title: "Metabolic & Lipids",   fields: ["diabetes_dx","hba1c","ldl","hdl"] },
+
+  { key: "lifestyleMindset", title: "Lifestyle", fields: ["stress", "smoking"] },
+  { key: "lifestyleNutrition", title: "Nutrition", fields: ["fastfood", "fruits_veg", "fish"] },
+
+  {
+    key: "metabolicDiabetes",
+    title: "Metabolic",
+    fields: ["diabetes_dx", "hba1c", "ldl", "hdl"],
+  },
+  {
+    key: "metabolicLipids",
+    title: "Lipids",
+    fields: ["ldl", "hdl"],
+  },
 ];
+
 
 export function visibleFieldsForStep(stepIndex: number, form: FormState): (keyof FormState)[] {
   const base = STEPS[stepIndex].fields;
+  const key = STEPS[stepIndex].key;
+
   return base.filter((f) => {
     if (f === "family_mi_stroke_onset" && form.family_mi_stroke !== "yes") return false;
+
+    // diabetes logic: show HbA1c only when diabetes_dx === "no"
     if (f === "hba1c" && form.diabetes_dx !== "no") return false;
+
+    // ✅ only show the extra Lipids step when diabetes_dx === "no"
+    if (key === "metabolicLipids" && form.diabetes_dx !== "no") return false;
+
+    // ✅ on the Diabetes step:
+    // - if diabetes_dx === "no": hide LDL/HDL here (they come in the next step)
+    if (key === "metabolicDiabetes" && form.diabetes_dx === "no" && (f === "ldl" || f === "hdl")) return false;
+
     return true;
   });
 }
+

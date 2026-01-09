@@ -23,10 +23,13 @@ import type {
 import ProfileBodyStep from "@/components/survey/steps/ProfileBodyStep";
 import ActivityStep from "@/components/survey/steps/ActivityStep";
 import CardioStep from "@/components/survey/steps/CardioStep";
-import LifestyleStep from "@/components/survey/steps/LifestyleStep";
-import MetabolicStep from "@/components/survey/steps/MetabolicStep";
+import MetabolicDiabetesStep from "@/components/survey/steps/MetabolicDiabetesStep";
+import MetabolicLipidsStep from "@/components/survey/steps/MetabolicLipidsStep";
 import ResultsPreview from "@/components/survey/ResultsPreview";
 import DataSharingStep from "@/components/survey/steps/DataSharingStep";
+import LifestyleMindsetStep from "@/components/survey/steps/LifestyleMindsetStep";
+import LifestyleNutritionStep from "@/components/survey/steps/LifestyleNutritionStep";
+import { useSearchParams } from "next/navigation";
 
 // Helper to assert required (strip "" at submit time)
 const req = <T,>(v: T | ""): T => v as T;
@@ -84,6 +87,19 @@ export default function SurveyPage() {
     hdl: "",
     share_data: null,
   });
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const src = searchParams.get("src");
+    if (!src) return;
+
+    // track once per session so refresh doesn't spam
+    const key = `entry_tracked_${src}`;
+    if (sessionStorage.getItem(key)) return;
+
+    track("survey_entry", { src }); // src: "book" | "buch"
+    sessionStorage.setItem(key, "1");
+  }, [searchParams]);
 
   useEffect(() => {
     track("survey_view_start");
@@ -110,14 +126,34 @@ export default function SurveyPage() {
     });
   }
 
+  function isStepVisible(stepIndex: number) {
+    const k = STEPS[stepIndex]?.key;
+    if (!k) return false;
+
+    // hide lipids step unless diabetes_dx === "no"
+    if (k === "metabolicLipids" && form.diabetes_dx !== "no") return false;
+
+    return true;
+  }
+
   function next() {
     track("survey_next", { step: STEPS[step].key });
-    setStep((s) => Math.min(s + 1, STEPS.length - 1));
+
+    setStep((s) => {
+      let i = Math.min(s + 1, STEPS.length - 1);
+      while (i < STEPS.length - 1 && !isStepVisible(i)) i += 1;
+      return i;
+    });
   }
 
   function back() {
     track("survey_prev", { step: STEPS[step].key });
-    setStep((s) => Math.max(s - 1, 0));
+
+    setStep((s) => {
+      let i = Math.max(s - 1, 0);
+      while (i > 0 && !isStepVisible(i)) i -= 1;
+      return i;
+    });
   }
 
   async function submit() {
@@ -218,10 +254,15 @@ export default function SurveyPage() {
         return <ActivityStep form={form} set={set} />;
       case "cardio":
         return <CardioStep form={form} set={set} />;
-      case "lifestyle":
-        return <LifestyleStep form={form} set={set} />;
-      case "metabolic":
-        return <MetabolicStep form={form} set={set} />;
+      case "lifestyleMindset":
+        return <LifestyleMindsetStep form={form} set={set} />;
+      case "lifestyleNutrition":
+        return <LifestyleNutritionStep form={form} set={set} />;
+      case "metabolicDiabetes":
+        return <MetabolicDiabetesStep form={form} set={set} />;
+      case "metabolicLipids":
+        return <MetabolicLipidsStep form={form} set={set} />;
+
       default:
         return null;
     }
