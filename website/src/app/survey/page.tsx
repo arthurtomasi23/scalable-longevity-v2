@@ -6,6 +6,8 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { scoreSurvey } from "@/lib/score";
 import { STEPS, visibleFieldsForStep } from "@/lib/surveyConfig";
+import { Home } from "lucide-react";
+
 import type {
   FormState,
   ScoreResult,
@@ -263,12 +265,20 @@ export default function SurveyPage() {
         <SurveyEntryTracker />
       </Suspense>
 
-      {/* Back to homepage */}
       <Link
         href="/"
-        className="cursor-pointer text-primary underline absolute top-8 left-8"
+        className="absolute top-6 left-6 md:top-8 md:left-8 text-primary"
+        aria-label="Zur Startseite"
       >
-        zurück zu Startseite
+        {/* Mobile: icon */}
+        <span className="md:hidden">
+          <Home className="h-6 w-6" />
+        </span>
+
+        {/* Desktop: text */}
+        <span className="hidden md:inline underline cursor-pointer">
+          zurück zu Startseite
+        </span>
       </Link>
 
       {/* Header + Progress */}
@@ -277,13 +287,13 @@ export default function SurveyPage() {
           <h1 className="text-4xl md:text-5xl font-medium text-font-primary">
             Selbsttest
           </h1>
-          <p className="mt-4 text-xl text-font-primary/80 max-w-3xl">
+          <p className="mt-4 mb-3 text-xl text-font-primary/80 max-w-3xl px-2">
             Finde heraus was wirklich hilft deine Healthspan zu optimieren
           </p>
 
           {/* Progress (hide on intro) */}
           {!isIntro && (
-            <div className="mt-10 mb-5 w-full max-w-4xl">
+            <div className="mt-8 mb-4 w-full max-w-4xl px-4 md:px-0">
               <div className="flex items-center gap-4">
                 <span className="text-font-primary/80 text-base w-10 text-left">
                   0%
