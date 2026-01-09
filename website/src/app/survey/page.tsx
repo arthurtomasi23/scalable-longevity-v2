@@ -30,6 +30,8 @@ import DataSharingStep from "@/components/survey/steps/DataSharingStep";
 import LifestyleMindsetStep from "@/components/survey/steps/LifestyleMindsetStep";
 import LifestyleNutritionStep from "@/components/survey/steps/LifestyleNutritionStep";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import SurveyEntryTracker from "@/components/survey/SurveyEntryTracker";
 
 // Helper to assert required (strip "" at submit time)
 const req = <T,>(v: T | ""): T => v as T;
@@ -87,19 +89,6 @@ export default function SurveyPage() {
     hdl: "",
     share_data: null,
   });
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const src = searchParams.get("src");
-    if (!src) return;
-
-    // track once per session so refresh doesn't spam
-    const key = `entry_tracked_${src}`;
-    if (sessionStorage.getItem(key)) return;
-
-    track("survey_entry", { src }); // src: "book" | "buch"
-    sessionStorage.setItem(key, "1");
-  }, [searchParams]);
 
   useEffect(() => {
     track("survey_view_start");
@@ -270,6 +259,10 @@ export default function SurveyPage() {
 
   return (
     <section id="survey" className="h-screen w-full flex flex-col items-center">
+      <Suspense fallback={null}>
+        <SurveyEntryTracker />
+      </Suspense>
+
       {/* Back to homepage */}
       <Link
         href="/"
