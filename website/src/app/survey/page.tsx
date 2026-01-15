@@ -22,18 +22,18 @@ import type {
   AgeOfOnset,
 } from "@/lib/surveyTypes";
 
-import ProfileBodyStep from "@/components/survey/steps/ProfileBodyStep";
-import ActivityStep from "@/components/survey/steps/ActivityStep";
-import CardioStep from "@/components/survey/steps/CardioStep";
-import MetabolicDiabetesStep from "@/components/survey/steps/MetabolicDiabetesStep";
-import MetabolicLipidsStep from "@/components/survey/steps/MetabolicLipidsStep";
-import ResultsPreview from "@/components/survey/ResultsPreview";
-import DataSharingStep from "@/components/survey/steps/DataSharingStep";
-import LifestyleMindsetStep from "@/components/survey/steps/LifestyleMindsetStep";
-import LifestyleNutritionStep from "@/components/survey/steps/LifestyleNutritionStep";
+import ProfileBodyStep from "@/app/survey/steps/ProfileBodyStep";
+import ActivityStep from "@/app/survey/steps/ActivityStep";
+import CardioStep from "@/app/survey/steps/CardioStep";
+import MetabolicDiabetesStep from "@/app/survey/steps/MetabolicDiabetesStep";
+import MetabolicLipidsStep from "@/app/survey/steps/MetabolicLipidsStep";
+import ResultsPreview from "../survey/components/ResultsPreview";
+import DataSharingStep from "@/app/survey/steps/DataSharingStep";
+import LifestyleMindsetStep from "@/app/survey/steps/LifestyleMindsetStep";
+import LifestyleNutritionStep from "@/app/survey/steps/LifestyleNutritionStep";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import SurveyEntryTracker from "@/components/survey/SurveyEntryTracker";
+import SurveyEntryTracker from "../survey/components/SurveyEntryTracker";
 
 // Helper to assert required (strip "" at submit time)
 const req = <T,>(v: T | ""): T => v as T;
@@ -277,7 +277,7 @@ export default function SurveyPage() {
 
         {/* Desktop: text */}
         <span className="hidden md:inline underline cursor-pointer">
-          zurück zu Startseite
+          Zurück zur Startseite
         </span>
       </Link>
 
@@ -371,7 +371,11 @@ export default function SurveyPage() {
       {/* Preview */}
       {preview && (
         <div className="flex-1 w-full flex justify-center items-center px-4 py-10">
-          <ResultsPreview preview={preview} chronoAge={Number(form.age)} />
+          <ResultsPreview
+            preview={preview}
+            chronoAge={Number(form.age)}
+            form={form}
+          />
         </div>
       )}
     </section>

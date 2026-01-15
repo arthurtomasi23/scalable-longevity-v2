@@ -2,7 +2,7 @@
 
 :root {
   /* Base background + foreground */
-  --background: #FAFAFA;
+  --background: #F6F8FB;
   --foreground: #1A1A1A;
 
   /* Brand palette */
@@ -38,7 +38,7 @@ html { scroll-behavior: smooth; }
 @media (prefers-color-scheme: dark) {
   :root {
     /* adjust background */
-  --background: #FAFAFA;
+  --background: #F6F8FB;
   --foreground: #1A1A1A;
   }
 }
