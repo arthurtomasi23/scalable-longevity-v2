@@ -72,7 +72,7 @@ export default function FiveParts() {
           <br /> die dein Leben nachhaltig verändern
         </h2>
         <p className="font-medium text-xl max-w-4xl mt-4">
-          Von Ernährung bis Erholung – wir helfen dir, in Balance zu leben und
+          Von Ernährung bis Erholung - wir helfen dir, in Balance zu leben und
           deine Longevity-Ziele zu erreichen.
         </p>
       </div>
