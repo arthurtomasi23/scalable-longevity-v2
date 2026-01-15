@@ -55,7 +55,10 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com" className="hover:underline">
+                <a
+                  href="https://linkedin.com/scalable-longevity-solutions-gmbh"
+                  className="hover:underline"
+                >
                   LinkedIn
                 </a>
               </li>

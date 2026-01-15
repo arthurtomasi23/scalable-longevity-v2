@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Principles from "@/components/Principles";
+import BookInfo from "../components/BookInfo";
 // import Features from "@/components/Features";
 import CTA from "@/components/CTA";
 import Survey from "@/components/Survey";
@@ -15,6 +16,7 @@ export default function Home() {
       <FiveParts />
       <Survey />
       <Newsletter />
+      <BookInfo />
       {/* <Features /> */}
     </div>
   );
