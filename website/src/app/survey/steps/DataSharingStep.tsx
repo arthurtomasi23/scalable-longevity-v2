@@ -37,13 +37,21 @@ export default function DataSharingStep({
           </div>
 
           <div>
-            <div className="bg-background p-1 rounded-full flex items-center gap-1">
+            <div className="bg-background p-1 rounded-full flex items-center gap-1 relative">
+              {/* Sliding indicator */}
+              <div
+                className={[
+                  "absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-full bg-secondary transition-transform duration-300 ease-in-out",
+                  share ? "translate-x-[calc(100%+8px)]" : "translate-x-0",
+                ].join(" ")}
+              />
+
               <button
                 type="button"
                 onClick={() => set("share_data", false)}
                 className={[
-                  "cursor-pointer w-full rounded-full py-3 text-sm transition",
-                  !share ? "bg-primary text-white" : "bg-transparent",
+                  "relative z-10 cursor-pointer w-full rounded-full py-3 text-sm transition-colors duration-300",
+                  !share ? "text-white" : "text-font-secondary",
                 ].join(" ")}
               >
                 Nicht Teilen
@@ -53,8 +61,8 @@ export default function DataSharingStep({
                 type="button"
                 onClick={() => set("share_data", true)}
                 className={[
-                  "cursor-pointer w-full rounded-full py-3 text-sm transition",
-                  share ? "bg-primary text-white" : "bg-transparent",
+                  "relative z-10 cursor-pointer w-full rounded-full py-3 text-sm transition-colors duration-300",
+                  share ? "text-white" : "text-font-secondary",
                 ].join(" ")}
               >
                 Teilen

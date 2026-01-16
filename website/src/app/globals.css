@@ -6,13 +6,16 @@
   --foreground: #1A1A1A;
 
   /* Brand palette */
-  --primary: #2E4A3F;      /* Sunrise Gold (CTA) */
-  --secondary: #87AFC7;    /* Sky Blue */
-  --card: #FFFFFF;         /* Card background */
-  --card-border: #F2F2F2;  /* Card border */
-  --font-primary: #3B3B3C; /* Main text */
-  --font-secondary: #C1C1C1; /* Secondary text */
+  --primary: #2E4A3F;      /* Dark green (CTA) - KEEP */
+  --secondary: #4A8F74;    /* Medium green - complements primary */
+  --accent: #5A9A8F;       /* Teal-green accent */
+  --card: #FFFFFF;         /* Card background - KEEP */
+  --card-border: #E8EDF2;  /* Subtle border - complements background */
+  --font-primary: #1F2E28; /* Rich dark green-gray for main text */
+  --font-secondary: #6B7A73; /* Muted green-gray for secondary text */
+  --font-muted: #9BA8A3;   /* Light green-gray for muted text */
 }
+
 html { scroll-behavior: smooth; }
 
 @theme inline {
@@ -23,24 +26,18 @@ html { scroll-behavior: smooth; }
   /* Brand colors */
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
 
   /* Font colors */
   --color-font-primary: var(--font-primary);
   --color-font-secondary: var(--font-secondary);
+  --color-font-muted: var(--font-muted);
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* adjust background */
-  --background: #F6F8FB;
-  --foreground: #1A1A1A;
-  }
 }
 
 body {
