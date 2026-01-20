@@ -32,8 +32,8 @@ export default function HeaderNav() {
             <Link href="/#fiveparts" className={navLinkBase}>
               Gesundheitsfelder
             </Link>
-            <Link href="/#survey" className={navLinkBase}>
-              Mach den Test
+            <Link href="/#bookinfo" className={navLinkBase}>
+              Jetzt mehr Erfahren
             </Link>
           </nav>
         </div>

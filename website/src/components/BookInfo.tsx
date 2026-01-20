@@ -5,10 +5,27 @@ import Image from "next/image";
 import { Download } from "lucide-react";
 
 export default function BookInfo() {
+  const handleDownload = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
+    // Download both PDFs
+    const files = ["/book/literature-1.pdf", "/book/literature-2.pdf"];
+    
+    files.forEach((file, index) => {
+      setTimeout(() => {
+        const link = document.createElement("a");
+        link.href = file;
+        link.download = file.split("/").pop() || "literature.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, index * 200); // Small delay between downloads
+    });
+  };
   return (
     <section
-      id="book"
-      className="scroll-mt-[5vh] flex flex-col md:flex-row gap-8 md:gap-12 text-black w-full px-6 md:px-20 justify-center items-center mb-10"
+      id="bookinfo"
+      className="scroll-mt-[15vh] flex flex-col md:flex-row gap-8 md:gap-12 text-black w-full px-6 md:px-20 justify-center items-center mb-10"
     >
       {/* Image on the left */}
       <div className="flex-shrink-0 w-full md:w-auto mb-20 md:mb-0">
@@ -46,13 +63,13 @@ export default function BookInfo() {
           </p>
 
           <a
-            href="/book/literature.pdf"
-            download
+            href="#"
+            onClick={handleDownload}
             className="flex items-center justify-center gap-3 py-4 px-6 rounded-full bg-primary text-white hover:opacity-95 transition cursor-pointer font-medium text-base w-fit"
-            aria-label="Literatur PDF herunterladen"
+            aria-label="Literatur PDFs herunterladen"
           >
             <Download className="w-5 h-5" />
-            Literatur PDF herunterladen
+            Literatur PDFs herunterladen
           </a>
         </div>
       </div>
