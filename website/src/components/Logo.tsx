@@ -12,9 +12,11 @@ export default function Logo() {
           width={30}
           height={30}
         />
-        <p>
-          know
-          <span className="italic -m-0.5">age</span>
+        <p
+          className="text-2xl font-bold"
+          style={{ fontFamily: "var(--font-satoshi)" }}
+        >
+          AgePilot
         </p>
       </Link>
     </div>

@@ -14,7 +14,7 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "knowage - Mehr Lebenszeit",
+  title: "AgePilot - Mehr gesunde Lebenszeit",
   description: "Einfach gesünder Leben Tag für Tag.",
   keywords: [
     "Longevity",
@@ -23,20 +23,20 @@ export const metadata: Metadata = {
     "Umfrage",
     "Lebensstil verbessern",
   ],
-  authors: [{ name: "knowage Team", url: "https://scalable-longevity.com" }],
+  authors: [{ name: "AgePilot Team", url: "https://scalable-longevity.com" }],
   metadataBase: new URL("https://scalable-longevity.com"),
   openGraph: {
-    title: "knowage - Mehr gesunde Lebenszeit",
+    title: "AgePilot - Mehr gesunde Lebenszeit",
     description:
       "Dein Weg zu mehr gesunder Lebenszeit. Einfach. Verständlich. Wissenschaftlich fundiert.",
     url: "https://scalable-longevity.com",
-    siteName: "knowage",
+    siteName: "AgePilot",
     images: [
       {
         url: "/background.jpg",
         width: 1200,
         height: 630,
-        alt: "knowage - Mehr gesunde Lebenszeit",
+        alt: "AgePilot - Mehr gesunde Lebenszeit",
       },
     ],
     locale: "de_DE",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "knowage - Mehr Lebenszeit",
+    title: "AgePilot - Mehr gesunde Lebenszeit",
     description: "Simple Changes für langfristiges Wohlbefinden.",
     images: ["/background.jpg"],
     creator: "@deinTwitterHandle",
@@ -70,7 +70,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "knowage",
+                name: "AgePilot",
               url: "https://scalable-longevity.com",
               logo: "https://scalable-longevity.com/logo.svg",
             }),
